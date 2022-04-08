@@ -1,0 +1,1004 @@
+
+<!DOCTYPE html>
+<html>
+<title>JSFScan</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.myInput {
+  background-image: url("/css/searchicon.png");
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+.myUL {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.myUL li a {
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block
+}
+
+.myUL li a:hover:not(.header) {
+  background-color: #eee;
+}
+
+pre {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  border-left: 3px solid #2798e3;
+  color: #666;
+  page-break-inside: avoid;
+  font-family: monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 1.6em;
+  max-width: 100%;
+  overflow: auto;
+  padding: 1em 1.5em;
+  display: block;
+  word-wrap: break-word;
+}
+
+pre1 {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  border-left: 3px solid #e32727;
+  color: #666;
+  page-break-inside: avoid;
+  font-family: monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 1.6em;
+  max-width: 100%;
+  overflow: auto;
+  padding: 1em 1.5em;
+  display: block;
+  word-wrap: break-word;
+}
+
+a:focus {
+  color:blue;
+}
+
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+<body class="w3-light-grey">
+
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+  <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+  <span class="w3-bar-item w3-right"><strong>JSFScan</strong></span>
+</div>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="w3-container w3-row">
+    <div class="w3-col s4">
+      <img src="https://svgshare.com/i/TVH.svg" class="w3-circle w3-margin-left" style="width:46px">
+    </div>
+    <div class="w3-col s8 w3-bar">
+      <span style="font-size:20px;">Welcome! to JSFScan Report.</span><br>
+    </div>
+  </div>
+  <hr>
+  <div class="w3-container">
+    <h5><strong>Dashboard</strong></h5>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding link" onclick=openTable("page1");><i class="fa fa-users fa-fw" ></i> All JavaScript Links</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding link" onclick=openTable("page2");><i class="fa fa-eye fa-fw"></i>  Live JavaScript Links</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding link" onclick=openTable("page3");><i class="fa fa-users fa-fw"></i>  Endpoints</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding link" onclick=openTable("page4");><i class="fa fa-user-secret fa-fw"></i>  Secrets</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding link" onclick=openTable("page5");><i class="fa fa-list fa-fw"></i>  Wordlist</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding link" onclick=openTable("page6");><i class="fa fa-address-card fa-fw"></i>  Variables</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding link" onclick=openTable("page7");><i class="fa fa-bank fa-fw"></i>  DOM XSS</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding link" onclick=openTable("page8");><i class="fa fa-history fa-fw"></i>  JSFiles For Manualy Testing</a>
+    <br><br>
+  </div>
+</nav>
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+
+  <body id="page">
+
+    <div class="w3-container report" id="page1" style="display: none; padding-top:22px">
+    <h4><b><i class="fa fa-dashboard"></i> All JavaScript Links</b></h4> 
+ <input class='myInput' type='text' id='myInput1' onkeyup="myFunction('myInput1', 'myUL1')" placeholder=Search.. title=Search>
+    <div class=w3-responsive w3-card-4>
+      <ul id="myUL1" class="myUL">
+<li><a href=http://api.blogger.com:80/scripts/blogger.js>http://api.blogger.com:80/scripts/blogger.js</a></li>
+<li><a href=http://api.blogger.com:80/scripts/focus.js>http://api.blogger.com:80/scripts/focus.js</a></li>
+<li><a href=http://beta.blogger.com:80/app/scripts/animation_common.js>http://beta.blogger.com:80/app/scripts/animation_common.js</a></li>
+<li><a href=http://beta.blogger.com:80/app/scripts/animation_explore.js>http://beta.blogger.com:80/app/scripts/animation_explore.js</a></li>
+<li><a href=http://beta.blogger.com:80/app/scripts/detect.js>http://beta.blogger.com:80/app/scripts/detect.js</a></li>
+<li><a href=http://beta.blogger.com:80/app/scripts/dom.common.js>http://beta.blogger.com:80/app/scripts/dom.common.js</a></li>
+<li><a href=http://beta.blogger.com:80/app/scripts/editor.js>http://beta.blogger.com:80/app/scripts/editor.js</a></li>
+<li><a href=http://beta.blogger.com:80/dyn-js/backlink_count.js>http://beta.blogger.com:80/dyn-js/backlink_count.js</a></li>
+<li><a href=http://beta.blogger.com:80/js/backlink_control.js>http://beta.blogger.com:80/js/backlink_control.js</a></li>
+<li><a href=http://beta.blogger.com:80/js/backlink.js>http://beta.blogger.com:80/js/backlink.js</a></li>
+<li><a href=http://beta.blogger.com:80/js/__utm.js>http://beta.blogger.com:80/js/__utm.js</a></li>
+<li><a href=http://beta.blogger.com:80/layouts/1796965729-layouts.js>http://beta.blogger.com:80/layouts/1796965729-layouts.js</a></li>
+<li><a href=http://beta.blogger.com:80/scripts/blogger.js>http://beta.blogger.com:80/scripts/blogger.js</a></li>
+<li><a href=http://beta.blogger.com:80/scripts/browse.common.js>http://beta.blogger.com:80/scripts/browse.common.js</a></li>
+<li><a href=http://beta.blogger.com:80/scripts/emaillink.js>http://beta.blogger.com:80/scripts/emaillink.js</a></li>
+<li><a href=http://beta.blogger.com:80/scripts/focus.js>http://beta.blogger.com:80/scripts/focus.js</a></li>
+<li><a href=http://beta.blogger.com:80/scripts/netscape_widget.js>http://beta.blogger.com:80/scripts/netscape_widget.js</a></li>
+<li><a href=http://beta.blogger.com:80/widgets/1819633357-widgets.js>http://beta.blogger.com:80/widgets/1819633357-widgets.js</a></li>
+<li><a href=http://beta.blogger.com/app/scripts/common.js>http://beta.blogger.com/app/scripts/common.js</a></li>
+<li><a href=http://beta.blogger.com/app/scripts/emaillink.js>http://beta.blogger.com/app/scripts/emaillink.js</a></li>
+<li><a href=http://beta.blogger.com/dyn-js/backlink.js>http://beta.blogger.com/dyn-js/backlink.js</a></li>
+<li><a href=http://beta.blogger.com/js/cookies.common.js>http://beta.blogger.com/js/cookies.common.js</a></li>
+<li><a href=http://beta.blogger.com/v-app/scripts/1019856700-common.js>http://beta.blogger.com/v-app/scripts/1019856700-common.js</a></li>
+<li><a href=http://beta.blogger.com/v-app/scripts/107652916-dom.common.js>http://beta.blogger.com/v-app/scripts/107652916-dom.common.js</a></li>
+<li><a href=http://beta.blogger.com/v-app/scripts/1118085881-dom.common.js>http://beta.blogger.com/v-app/scripts/1118085881-dom.common.js</a></li>
+<li><a href=http://beta.blogger.com/v-js/3625575137-cookies.common.js>http://beta.blogger.com/v-js/3625575137-cookies.common.js</a></li>
+<li><a href=http://beta.blogger.com/widgets/1638859070-widgets.js>http://beta.blogger.com/widgets/1638859070-widgets.js</a></li>
+<li><a href=http://beta.blogger.com/widgets/2200193613-widgets.js>http://beta.blogger.com/widgets/2200193613-widgets.js</a></li>
+<li><a href=http://beta.blogger.com/widgets/2413301736-widgets.js>http://beta.blogger.com/widgets/2413301736-widgets.js</a></li>
+<li><a href=http://beta.blogger.com/widgets/2611175964-widgets.js>http://beta.blogger.com/widgets/2611175964-widgets.js</a></li>
+<li><a href=http://beta.blogger.com/widgets/2662811415-widgets.js>http://beta.blogger.com/widgets/2662811415-widgets.js</a></li>
+<li><a href=http://beta.blogger.com/widgets/3229027966-widgets.js>http://beta.blogger.com/widgets/3229027966-widgets.js</a></li>
+<li><a href=http://beta.blogger.com/widgets/3611446312-widgets.js>http://beta.blogger.com/widgets/3611446312-widgets.js</a></li>
+<li><a href=http://beta.blogger.com/widgets/94464370-widgets.js>http://beta.blogger.com/widgets/94464370-widgets.js</a></li>
+<li><a href=http://blogger.com/AC_OETags.js>http://blogger.com/AC_OETags.js</a></li>
+<li><a href=http://blogger.com/AC_OETags.js>http://blogger.com/AC_OETags.js</a></li>
+<li><a href=http://blogger.com/....js>http://blogger.com/....js</a></li>
+<li><a href=http://blogger.com/....js>http://blogger.com/....js</a></li>
+<li><a href=http://blogspot.blogger.com:80/domain_checkform.js>http://blogspot.blogger.com:80/domain_checkform.js</a></li>
+<li><a href=http://blogspot.blogger.com:80/scripts/blogger.js>http://blogspot.blogger.com:80/scripts/blogger.js</a></li>
+<li><a href=http://blogspot.blogger.com:80/scripts/netscape_widget.js>http://blogspot.blogger.com:80/scripts/netscape_widget.js</a></li>
+<li><a href=http://blogspot.blogger.com/blogspot-admin/domain_checkform.js>http://blogspot.blogger.com/blogspot-admin/domain_checkform.js</a></li>
+<li><a href=http://bp2.blogger.com/static/js/jwplayer/jwplayer.js>http://bp2.blogger.com/static/js/jwplayer/jwplayer.js</a></li>
+<li><a href=http://bp2.blogger.com/static/js/video-embed-rewriter.js>http://bp2.blogger.com/static/js/video-embed-rewriter.js</a></li>
+<li><a href=http://brahma.blogger.com:80/scripts/blogger.js>http://brahma.blogger.com:80/scripts/blogger.js</a></li>
+<li><a href=http://buzz.blogger.com/2011/01/google-analytics.com/ga.js>http://buzz.blogger.com/2011/01/google-analytics.com/ga.js</a></li>
+<li><a href=http://buzz.blogger.com/2012/02/.gstatic.com/feedback/api.js>http://buzz.blogger.com/2012/02/.gstatic.com/feedback/api.js</a></li>
+<li><a href=http://buzz.blogger.com/2012/07/.google-analytics.com/ga.js>http://buzz.blogger.com/2012/07/.google-analytics.com/ga.js</a></li>
+<li><a href=http://buzz.blogger.com:80/__utm.js>http://buzz.blogger.com:80/__utm.js</a></li>
+<li><a href=http://buzz.blogger.com/build/yuiloader/yuiloader.js>http://buzz.blogger.com/build/yuiloader/yuiloader.js</a></li>
+<li><a href=http://buzz.blogger.com/build/yuiloader/yuiloader-min.js>http://buzz.blogger.com/build/yuiloader/yuiloader-min.js</a></li>
+<li><a href=http://buzz.blogger.com/build/yui/yui.js>http://buzz.blogger.com/build/yui/yui.js</a></li>
+<li><a href=http://buzz.blogger.com/build/yui/yui-min.js>http://buzz.blogger.com/build/yui/yui-min.js</a></li>
+<li><a href=http://buzz.blogger.com/CFInstall.js>http://buzz.blogger.com/CFInstall.js</a></li>
+<li><a href=http://buzz.blogger.com/CFInstall.min.js>http://buzz.blogger.com/CFInstall.min.js</a></li>
+<li><a href=http://buzz.blogger.com/default.I.js>http://buzz.blogger.com/default.I.js</a></li>
+<li><a href=http://buzz.blogger.com/dojo/dojo.js>http://buzz.blogger.com/dojo/dojo.js</a></li>
+<li><a href=http://buzz.blogger.com/dojo/dojo.xd.js>http://buzz.blogger.com/dojo/dojo.xd.js</a></li>
+<li><a href=http://buzz.blogger.com/ext-core-debug.js>http://buzz.blogger.com/ext-core-debug.js</a></li>
+<li><a href=http://buzz.blogger.com/ext-core.js>http://buzz.blogger.com/ext-core.js</a></li>
+<li><a href=http://buzz.blogger.com/.google-analytics.com/ga.js>http://buzz.blogger.com/.google-analytics.com/ga.js</a></li>
+<li><a href=http://buzz.blogger.com/__help-utm.js>http://buzz.blogger.com/__help-utm.js</a></li>
+<li><a href=http://buzz.blogger.com/jquery.js>http://buzz.blogger.com/jquery.js</a></li>
+<li><a href=http://buzz.blogger.com/jquery.min.js>http://buzz.blogger.com/jquery.min.js</a></li>
+<li><a href=http://buzz.blogger.com/jquery-ui.js>http://buzz.blogger.com/jquery-ui.js</a></li>
+<li><a href=http://buzz.blogger.com/jquery-ui.min.js>http://buzz.blogger.com/jquery-ui.min.js</a></li>
+<li><a href=http://buzz.blogger.com/js/cookiechoices.js>http://buzz.blogger.com/js/cookiechoices.js</a></li>
+<li><a href=http://buzz.blogger.com/mootools.js>http://buzz.blogger.com/mootools.js</a></li>
+<li><a href=http://buzz.blogger.com/mootools-yui-compressed.js>http://buzz.blogger.com/mootools-yui-compressed.js</a></li>
+<li><a href=http://buzz.blogger.com/prototype.js>http://buzz.blogger.com/prototype.js</a></li>
+<li><a href=http://buzz.blogger.com/scriptaculous.js>http://buzz.blogger.com/scriptaculous.js</a></li>
+<li><a href=http://buzz.blogger.com/swfobject.js>http://buzz.blogger.com/swfobject.js</a></li>
+<li><a href=http://buzz.blogger.com/swfobject_src.js>http://buzz.blogger.com/swfobject_src.js</a></li>
+<li><a href=http://buzz.blogger.com/webfont_debug.js>http://buzz.blogger.com/webfont_debug.js</a></li>
+<li><a href=http://buzz.blogger.com/webfont.js>http://buzz.blogger.com/webfont.js</a></li>
+<li><a href=http://code.blogger.com:80/__utm.js>http://code.blogger.com:80/__utm.js</a></li>
+<li><a href=http://code.blogger.com/build/yuiloader/yuiloader.js>http://code.blogger.com/build/yuiloader/yuiloader.js</a></li>
+<li><a href=http://code.blogger.com/build/yuiloader/yuiloader-min.js>http://code.blogger.com/build/yuiloader/yuiloader-min.js</a></li>
+<li><a href=http://code.blogger.com/build/yui/yui.js>http://code.blogger.com/build/yui/yui.js</a></li>
+<li><a href=http://code.blogger.com/build/yui/yui-min.js>http://code.blogger.com/build/yui/yui-min.js</a></li>
+<li><a href=http://code.blogger.com/CFInstall.js>http://code.blogger.com/CFInstall.js</a></li>
+<li><a href=http://code.blogger.com/CFInstall.min.js>http://code.blogger.com/CFInstall.min.js</a></li>
+<li><a href=http://code.blogger.com/dd-level-menu.js>http://code.blogger.com/dd-level-menu.js</a></li>
+<li><a href=http://code.blogger.com/default+en.I.js>http://code.blogger.com/default+en.I.js</a></li>
+<li><a href=http://code.blogger.com/default.I.js>http://code.blogger.com/default.I.js</a></li>
+<li><a href=http://code.blogger.com/dojo/dojo.js>http://code.blogger.com/dojo/dojo.js</a></li>
+<li><a href=http://code.blogger.com/dojo/dojo.js.uncompressed.js>http://code.blogger.com/dojo/dojo.js.uncompressed.js</a></li>
+<li><a href=http://code.blogger.com/dojo/dojo.xd.js>http://code.blogger.com/dojo/dojo.xd.js</a></li>
+<li><a href=http://code.blogger.com/dojo/dojo.xd.js.uncompressed.js>http://code.blogger.com/dojo/dojo.xd.js.uncompressed.js</a></li>
+<li><a href=http://code.blogger.com/ext-core-debug.js>http://code.blogger.com/ext-core-debug.js</a></li>
+<li><a href=http://code.blogger.com/ext-core.js>http://code.blogger.com/ext-core.js</a></li>
+<li><a href=http://code.blogger.com/.gstatic.com/feedback/api.js>http://code.blogger.com/.gstatic.com/feedback/api.js</a></li>
+<li><a href=http://code.blogger.com/jquery.js>http://code.blogger.com/jquery.js</a></li>
+<li><a href=http://code.blogger.com/jquery.min.js>http://code.blogger.com/jquery.min.js</a></li>
+<li><a href=http://code.blogger.com/jquery-ui.js>http://code.blogger.com/jquery-ui.js</a></li>
+<li><a href=http://code.blogger.com/jquery-ui.min.js>http://code.blogger.com/jquery-ui.min.js</a></li>
+<li><a href=http://code.blogger.com/.js>http://code.blogger.com/.js</a></li>
+<li><a href=http://code.blogger.com/mootools.js>http://code.blogger.com/mootools.js</a></li>
+<li><a href=http://code.blogger.com/mootools-yui-compressed.js>http://code.blogger.com/mootools-yui-compressed.js</a></li>
+<li><a href=http://code.blogger.com/prototype.js>http://code.blogger.com/prototype.js</a></li>
+<li><a href=http://code.blogger.com/scriptaculous.js>http://code.blogger.com/scriptaculous.js</a></li>
+<li><a href=http://code.blogger.com/swfobject.js>http://code.blogger.com/swfobject.js</a></li>
+<li><a href=http://code.blogger.com/swfobject_src.js>http://code.blogger.com/swfobject_src.js</a></li>
+<li><a href=http://code.blogger.com/webfont_debug.js>http://code.blogger.com/webfont_debug.js</a></li>
+<li><a href=http://code.blogger.com/webfont.js>http://code.blogger.com/webfont.js</a></li>
+<li><a href=http://domains.blogger.com:80/app/scripts/animation_common.js>http://domains.blogger.com:80/app/scripts/animation_common.js</a></li>
+<li><a href=http://domains.blogger.com:80/app/scripts/animation_explore.js>http://domains.blogger.com:80/app/scripts/animation_explore.js</a></li>
+<li><a href=http://domains.blogger.com:80/app/scripts/detect.js>http://domains.blogger.com:80/app/scripts/detect.js</a></li>
+<li><a href=http://domains.blogger.com:80/app/scripts/dom.common.js>http://domains.blogger.com:80/app/scripts/dom.common.js</a></li>
+<li><a href=http://domains.blogger.com:80/scripts/browse.common.js>http://domains.blogger.com:80/scripts/browse.common.js</a></li>
+<li><a href=http://domains.blogger.com:80/scripts/focus.js>http://domains.blogger.com:80/scripts/focus.js</a></li>
+<li><a href=http://draft.blogger.com/app/scripts/emaillink.js>http://draft.blogger.com/app/scripts/emaillink.js</a></li>
+<li><a href=http://draft.blogger.com/dyn-js/backlink_count.js>http://draft.blogger.com/dyn-js/backlink_count.js</a></li>
+<li><a href=http://help.blogger.com:80/scripts/blogger.js>http://help.blogger.com:80/scripts/blogger.js</a></li>
+<li><a href=http://help.blogger.com/bin/resource/urchin_util.js>http://help.blogger.com/bin/resource/urchin_util.js</a></li>
+<li><a href=http://help.blogger.com/bin/static.py?page=__utm.js>http://help.blogger.com/bin/static.py?page=__utm.js</a></li>
+<li><a href=http://new.blogger.com:80/blogspot-admin/domain_checkform.js>http://new.blogger.com:80/blogspot-admin/domain_checkform.js</a></li>
+<li><a href=http://new.blogger.com:80/control/shortcuts.js>http://new.blogger.com:80/control/shortcuts.js</a></li>
+<li><a href=http://new.blogger.com:80/dyn-js/backlink_count.js>http://new.blogger.com:80/dyn-js/backlink_count.js</a></li>
+<li><a href=http://new.blogger.com:80/scripts/blogger.js>http://new.blogger.com:80/scripts/blogger.js</a></li>
+<li><a href=http://new.blogger.com:80/scripts/focus.js>http://new.blogger.com:80/scripts/focus.js</a></li>
+<li><a href=http://new.blogger.com:80/scripts/formcheck.js>http://new.blogger.com:80/scripts/formcheck.js</a></li>
+<li><a href=http://new.blogger.com/js/__utm.js>http://new.blogger.com/js/__utm.js</a></li>
+<li><a href=http://photos.blogger.com:80/app/scripts/dom.common.js>http://photos.blogger.com:80/app/scripts/dom.common.js</a></li>
+<li><a href=http://photos.blogger.com:80/js/__utm.js>http://photos.blogger.com:80/js/__utm.js</a></li>
+<li><a href=http://plant.blogger.com:80/index.js>http://plant.blogger.com:80/index.js</a></li>
+<li><a href=http://plant.blogger.com:80/scripts/blogger.js>http://plant.blogger.com:80/scripts/blogger.js</a></li>
+<li><a href=http://plant.blogger.com:80/scripts/focus.js>http://plant.blogger.com:80/scripts/focus.js</a></li>
+<li><a href=http://plant.blogger.com/js/__utm.js>http://plant.blogger.com/js/__utm.js</a></li>
+<li><a href=http://play.blogger.com:80/gadget?up_speed=30&upt_speed=enum&lang=en&country=us&.lang=en&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=m7IbCDV1SMY/lib/libcore.js,OJKDp_5q3DU/lib/libdynamic-height.js,Uf6jdKDac1M/idi_module.js>http://play.blogger.com:80/gadget?up_speed=30&upt_speed=enum&lang=en&country=us&.lang=en&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=m7IbCDV1SMY/lib/libcore.js,OJKDp_5q3DU/lib/libdynamic-height.js,Uf6jdKDac1M/idi_module.js</a></li>
+<li><a href=http://play.blogger.com:80/gadget?up_speed=50&upt_speed=enum&lang=en&country=us&.lang=en&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=bR017l7I1tE/lib/libcore.js,OJKDp_5q3DU/lib/libdynamic-height.js,Uf6jdKDac1M/idi_module.js>http://play.blogger.com:80/gadget?up_speed=50&upt_speed=enum&lang=en&country=us&.lang=en&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=bR017l7I1tE/lib/libcore.js,OJKDp_5q3DU/lib/libdynamic-height.js,Uf6jdKDac1M/idi_module.js</a></li>
+<li><a href=http://play.blogger.com:80/gadget?up_speed=50&upt_speed=enum&lang=en&country=us&.lang=en&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=JfEcGcWHp7c/lib/libcore.js,OJKDp_5q3DU/lib/libdynamic-height.js,Uf6jdKDac1M/idi_module.js>http://play.blogger.com:80/gadget?up_speed=50&upt_speed=enum&lang=en&country=us&.lang=en&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=JfEcGcWHp7c/lib/libcore.js,OJKDp_5q3DU/lib/libdynamic-height.js,Uf6jdKDac1M/idi_module.js</a></li>
+<li><a href=http://play.blogger.com:80/gadget?up_speed=50&upt_speed=enum&lang=en&country=us&.lang=en&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=UlBt2x5sdLw/lib/libcore.js,sKgORJ-YRBw/lib/libdynamic-height.js,NOQWCcX0S7E/idi_module.js>http://play.blogger.com:80/gadget?up_speed=50&upt_speed=enum&lang=en&country=us&.lang=en&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=UlBt2x5sdLw/lib/libcore.js,sKgORJ-YRBw/lib/libdynamic-height.js,NOQWCcX0S7E/idi_module.js</a></li>
+<li><a href=http://play.blogger.com:80/gadget?up_speed=50&upt_speed=enum&lang=es&country=us&.lang=es&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=90pokcZbU4I/lib/libcore.js,OJKDp_5q3DU/lib/libdynamic-height.js,Uf6jdKDac1M/idi_module.js>http://play.blogger.com:80/gadget?up_speed=50&upt_speed=enum&lang=es&country=us&.lang=es&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=90pokcZbU4I/lib/libcore.js,OJKDp_5q3DU/lib/libdynamic-height.js,Uf6jdKDac1M/idi_module.js</a></li>
+<li><a href=http://play.blogger.com:80/gadget?up_speed=50&upt_speed=enum&lang=es&country=us&.lang=es&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=JfEcGcWHp7c/lib/libcore.js,OJKDp_5q3DU/lib/libdynamic-height.js,Uf6jdKDac1M/idi_module.js>http://play.blogger.com:80/gadget?up_speed=50&upt_speed=enum&lang=es&country=us&.lang=es&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=JfEcGcWHp7c/lib/libcore.js,OJKDp_5q3DU/lib/libdynamic-height.js,Uf6jdKDac1M/idi_module.js</a></li>
+<li><a href=http://play.blogger.com:80/gadget?up_speed=50&upt_speed=enum&lang=es&country=us&.lang=es&.country=us&synd=open&mid=2&ifpctok=5259028424639964039&parent=&libs=m7IbCDV1SMY/lib/libcore.js,OJKDp_5q3DU/lib/libdynamic-height.js,Uf6jdKDac1M/idi_module.js>http://play.blogger.com:80/gadget?up_speed=50&upt_speed=enum&lang=es&country=us&.lang=es&.country=us&synd=open&mid=2&ifpctok=5259028424639964039&parent=&libs=m7IbCDV1SMY/lib/libcore.js,OJKDp_5q3DU/lib/libdynamic-height.js,Uf6jdKDac1M/idi_module.js</a></li>
+<li><a href=http://play.blogger.com:80/gadget?up_speed=50&upt_speed=enum&lang=es&country=us&.lang=es&.country=us&synd=open&mid=3&ifpctok=-3109840396733968559&parent=&libs=90pokcZbU4I/lib/libcore.js,OJKDp_5q3DU/lib/libdynamic-height.js,Uf6jdKDac1M/idi_module.js>http://play.blogger.com:80/gadget?up_speed=50&upt_speed=enum&lang=es&country=us&.lang=es&.country=us&synd=open&mid=3&ifpctok=-3109840396733968559&parent=&libs=90pokcZbU4I/lib/libcore.js,OJKDp_5q3DU/lib/libdynamic-height.js,Uf6jdKDac1M/idi_module.js</a></li>
+<li><a href=http://play.blogger.com:80/gadget?up_speed=50&upt_speed=hidden&lang=es&country=mx&.lang=es&.country=mx&synd=ig&mid=99&parent=http://www.google.com.mx&libs=9yKJTwdwCZw/lib/libcore.js,DXEULJSfpLM/lib/libdynamic-height.js,c64nWSZKWFg/lib/libsetprefs.js>http://play.blogger.com:80/gadget?up_speed=50&upt_speed=hidden&lang=es&country=mx&.lang=es&.country=mx&synd=ig&mid=99&parent=http://www.google.com.mx&libs=9yKJTwdwCZw/lib/libcore.js,DXEULJSfpLM/lib/libdynamic-height.js,c64nWSZKWFg/lib/libsetprefs.js</a></li>
+<li><a href=http://play.blogger.com:80/gadget?up_speed=50&upt_speed=hidden&lang=es&country=mx&.lang=es&.country=mx&synd=ig&mid=99&parent=http://www.google.com.mx&libs=HCYu6mstKNU/lib/libcore.js,DXEULJSfpLM/lib/libdynamic-height.js,c64nWSZKWFg/lib/libsetprefs.js>http://play.blogger.com:80/gadget?up_speed=50&upt_speed=hidden&lang=es&country=mx&.lang=es&.country=mx&synd=ig&mid=99&parent=http://www.google.com.mx&libs=HCYu6mstKNU/lib/libcore.js,DXEULJSfpLM/lib/libdynamic-height.js,c64nWSZKWFg/lib/libsetprefs.js</a></li>
+<li><a href=http://play.blogger.com:80/gadget?up_speed=50&upt_speed=hidden&lang=es&country=us&.lang=es&.country=us&synd=ig&mid=1&parent=http://www.google.com&libs=Ck3ymtYtYoU/lib/libcore.js,0uj1fk8PYzE/lib/libdynamic-height.js,c64nWSZKWFg/lib/libsetprefs.js>http://play.blogger.com:80/gadget?up_speed=50&upt_speed=hidden&lang=es&country=us&.lang=es&.country=us&synd=ig&mid=1&parent=http://www.google.com&libs=Ck3ymtYtYoU/lib/libcore.js,0uj1fk8PYzE/lib/libdynamic-height.js,c64nWSZKWFg/lib/libsetprefs.js</a></li>
+<li><a href=http://play.blogger.com:80/gadget?up_speed=50&upt_speed=hidden&lang=es&country=us&.lang=es&.country=us&synd=ig&mid=1&parent=http://www.google.com&libs=HCYu6mstKNU/lib/libcore.js,DXEULJSfpLM/lib/libdynamic-height.js,c64nWSZKWFg/lib/libsetprefs.js>http://play.blogger.com:80/gadget?up_speed=50&upt_speed=hidden&lang=es&country=us&.lang=es&.country=us&synd=ig&mid=1&parent=http://www.google.com&libs=HCYu6mstKNU/lib/libcore.js,DXEULJSfpLM/lib/libdynamic-height.js,c64nWSZKWFg/lib/libsetprefs.js</a></li>
+<li><a href=http://play.blogger.com:80/gadget?up_speed=50&upt_speed=hidden&lang=es&country=us&.lang=es&.country=us&synd=ig&mid=1&parent=http://www.google.com&libs=m3SE662MhAE/lib/libcore.js,DXEULJSfpLM/lib/libdynamic-height.js,c64nWSZKWFg/lib/libsetprefs.js>http://play.blogger.com:80/gadget?up_speed=50&upt_speed=hidden&lang=es&country=us&.lang=es&.country=us&synd=ig&mid=1&parent=http://www.google.com&libs=m3SE662MhAE/lib/libcore.js,DXEULJSfpLM/lib/libdynamic-height.js,c64nWSZKWFg/lib/libsetprefs.js</a></li>
+<li><a href=http://play.blogger.com:80/gadget?up_speed=80&upt_speed=enum&lang=en&country=us&.lang=en&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=90pokcZbU4I/lib/libcore.js,OJKDp_5q3DU/lib/libdynamic-height.js,Uf6jdKDac1M/idi_module.js>http://play.blogger.com:80/gadget?up_speed=80&upt_speed=enum&lang=en&country=us&.lang=en&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=90pokcZbU4I/lib/libcore.js,OJKDp_5q3DU/lib/libdynamic-height.js,Uf6jdKDac1M/idi_module.js</a></li>
+<li><a href=http://play.blogger.com:80/gadget?up_speed=80&upt_speed=enum&lang=en&country=us&.lang=en&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=bR017l7I1tE/lib/libcore.js,OJKDp_5q3DU/lib/libdynamic-height.js,Uf6jdKDac1M/idi_module.js>http://play.blogger.com:80/gadget?up_speed=80&upt_speed=enum&lang=en&country=us&.lang=en&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=bR017l7I1tE/lib/libcore.js,OJKDp_5q3DU/lib/libdynamic-height.js,Uf6jdKDac1M/idi_module.js</a></li>
+<li><a href=http://play.blogger.com:80/gadget?up_speed=80&upt_speed=enum&lang=es&country=us&.lang=es&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=bR017l7I1tE/lib/libcore.js,OJKDp_5q3DU/lib/libdynamic-height.js,Uf6jdKDac1M/idi_module.js>http://play.blogger.com:80/gadget?up_speed=80&upt_speed=enum&lang=es&country=us&.lang=es&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=bR017l7I1tE/lib/libcore.js,OJKDp_5q3DU/lib/libdynamic-height.js,Uf6jdKDac1M/idi_module.js</a></li>
+<li><a href=http://play.blogger.com:80/gadget?up_speed=80&upt_speed=enum&lang=in&country=us&.lang=in&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=270inaq8wc4/lib/libcore.js,sKgORJ-YRBw/lib/libdynamic-height.js,NOQWCcX0S7E/idi_module.js>http://play.blogger.com:80/gadget?up_speed=80&upt_speed=enum&lang=in&country=us&.lang=in&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=270inaq8wc4/lib/libcore.js,sKgORJ-YRBw/lib/libdynamic-height.js,NOQWCcX0S7E/idi_module.js</a></li>
+<li><a href=http://play.blogger.com:80/gadget?up_speed=80&upt_speed=enum&lang=pt&country=us&.lang=pt&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=90pokcZbU4I/lib/libcore.js,OJKDp_5q3DU/lib/libdynamic-height.js,Uf6jdKDac1M/idi_module.js>http://play.blogger.com:80/gadget?up_speed=80&upt_speed=enum&lang=pt&country=us&.lang=pt&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=90pokcZbU4I/lib/libcore.js,OJKDp_5q3DU/lib/libdynamic-height.js,Uf6jdKDac1M/idi_module.js</a></li>
+<li><a href=http://play.blogger.com:80/gadget?up_speed=80&upt_speed=enum&lang=ro&country=us&.lang=ro&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=gD7mP6I5DKA/lib/libcore.js,DXEULJSfpLM/lib/libdynamic-height.js,xZcxK85-Krk/idi_module.js>http://play.blogger.com:80/gadget?up_speed=80&upt_speed=enum&lang=ro&country=us&.lang=ro&.country=us&synd=open&mid=1&ifpctok=-7479081974561704543&parent=&libs=gD7mP6I5DKA/lib/libcore.js,DXEULJSfpLM/lib/libdynamic-height.js,xZcxK85-Krk/idi_module.js</a></li>
+<li><a href=http://play.blogger.com/common/js/1198523948-play.js>http://play.blogger.com/common/js/1198523948-play.js</a></li>
+<li><a href=http://play.blogger.com/common/js/1689282420-play.js>http://play.blogger.com/common/js/1689282420-play.js</a></li>
+<li><a href=http://play.blogger.com/common/js/1704117326-play.js>http://play.blogger.com/common/js/1704117326-play.js</a></li>
+<li><a href=http://play.blogger.com/common/js/2003137089-play.js>http://play.blogger.com/common/js/2003137089-play.js</a></li>
+<li><a href=http://play.blogger.com/common/js/2496932775-play.js>http://play.blogger.com/common/js/2496932775-play.js</a></li>
+<li><a href=http://play.blogger.com/common/js/2507745614-play.js>http://play.blogger.com/common/js/2507745614-play.js</a></li>
+<li><a href=http://play.blogger.com/common/js/2598357434-play.js>http://play.blogger.com/common/js/2598357434-play.js</a></li>
+<li><a href=http://play.blogger.com/common/js/2665973921-play.js>http://play.blogger.com/common/js/2665973921-play.js</a></li>
+<li><a href=http://play.blogger.com/common/js/3214086996-play.js>http://play.blogger.com/common/js/3214086996-play.js</a></li>
+<li><a href=http://play.blogger.com/common/js/3946312652-play.js>http://play.blogger.com/common/js/3946312652-play.js</a></li>
+<li><a href=http://play.blogger.com/common/js/395576937-play.js>http://play.blogger.com/common/js/395576937-play.js</a></li>
+<li><a href=http://play.blogger.com/common/js/61870252-play.js>http://play.blogger.com/common/js/61870252-play.js</a></li>
+<li><a href=http://pro2.blogger.com:80/scripts/blog_form_shortcuts_ie.js>http://pro2.blogger.com:80/scripts/blog_form_shortcuts_ie.js</a></li>
+<li><a href=http://pro2.blogger.com:80/scripts/raiseButtons_form.js>http://pro2.blogger.com:80/scripts/raiseButtons_form.js</a></li>
+<li><a href=http://pro2.blogger.com:80/scripts/spch.js>http://pro2.blogger.com:80/scripts/spch.js</a></li>
+<li><a href=http://pro2.blogger.com:80/scripts/toolbar.js>http://pro2.blogger.com:80/scripts/toolbar.js</a></li>
+<li><a href=http://pro.blogger.com:80/scripts/blog_form_shortcuts_ie.js>http://pro.blogger.com:80/scripts/blog_form_shortcuts_ie.js</a></li>
+<li><a href=http://pro.blogger.com:80/scripts/netscape_widget.js>http://pro.blogger.com:80/scripts/netscape_widget.js</a></li>
+<li><a href=http://pro.blogger.com:80/scripts/raiseButtons_form.js>http://pro.blogger.com:80/scripts/raiseButtons_form.js</a></li>
+<li><a href=http://pro.blogger.com:80/scripts/raiseButtons_moz.js>http://pro.blogger.com:80/scripts/raiseButtons_moz.js</a></li>
+<li><a href=http://pro.blogger.com:80/scripts/spch.js>http://pro.blogger.com:80/scripts/spch.js</a></li>
+<li><a href=http://pro.blogger.com/scripts/blogger.js>http://pro.blogger.com/scripts/blogger.js</a></li>
+<li><a href=http://pro.blogger.com/scripts/signin.js>http://pro.blogger.com/scripts/signin.js</a></li>
+<li><a href=https://beta.blogger.com/app/scripts/comments.common.js>https://beta.blogger.com/app/scripts/comments.common.js</a></li>
+<li><a href=https://beta.blogger.com/app/scripts/formcheck.js>https://beta.blogger.com/app/scripts/formcheck.js</a></li>
+<li><a href=https://draft.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%20%3Cscript%3E(function(d,%20s,%20id)%20%7B%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20if%20(d.getElementById(id))%20return;%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20js.src%20=%20%22//connect.facebook.net/de_DE/all.js>https://draft.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%20%3Cscript%3E(function(d,%20s,%20id)%20%7B%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20if%20(d.getElementById(id))%20return;%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20js.src%20=%20%22//connect.facebook.net/de_DE/all.js</a></li>
+<li><a href=https://draft.blogger.com/about/js/main.min.js>https://draft.blogger.com/about/js/main.min.js</a></li>
+<li><a href=https://draft.blogger.com/blogin.g?blogspotURL=https://pm-modi-berozgaar-bhatta-yojnabero.blogspot.com/jquery.tools.min.js>https://draft.blogger.com/blogin.g?blogspotURL=https://pm-modi-berozgaar-bhatta-yojnabero.blogspot.com/jquery.tools.min.js</a></li>
+<li><a href=https://draft.blogger.com/feeds/19160405/posts/D3.js>https://draft.blogger.com/feeds/19160405/posts/D3.js</a></li>
+<li><a href=https://draft.blogger.com/feeds/5532324792230149469/posts/nuxt.js>https://draft.blogger.com/feeds/5532324792230149469/posts/nuxt.js</a></li>
+<li><a href=https://draft.blogger.com/gci_91f30755d6a6b787dcc2a4062e6e9824.js>https://draft.blogger.com/gci_91f30755d6a6b787dcc2a4062e6e9824.js</a></li>
+<li><a href=https://draft.blogger.com/profile/gci_91f30755d6a6b787dcc2a4062e6e9824.js>https://draft.blogger.com/profile/gci_91f30755d6a6b787dcc2a4062e6e9824.js</a></li>
+<li><a href=https://draft.blogger.com/profile/.google-analytics.com/ga.js>https://draft.blogger.com/profile/.google-analytics.com/ga.js</a></li>
+<li><a href=http://search.blogger.com:80/blogsearch/script/bsrchapp.js>http://search.blogger.com:80/blogsearch/script/bsrchapp.js</a></li>
+<li><a href=http://search.blogger.com:80/blogsearch/script/bsrchapp.js>http://search.blogger.com:80/blogsearch/script/bsrchapp.js</a></li>
+<li><a href=http://search.blogger.com:80/blogsearch/script/bsrchnbar.js>http://search.blogger.com:80/blogsearch/script/bsrchnbar.js</a></li>
+<li><a href=http://search.blogger.com:80/blogsearch/script/bsrchnbar.js>http://search.blogger.com:80/blogsearch/script/bsrchnbar.js</a></li>
+<li><a href=http://search.blogger.com:80/blogsearch/script/bsrchsbox.js>http://search.blogger.com:80/blogsearch/script/bsrchsbox.js</a></li>
+<li><a href=http://search.blogger.com:80/blogsearch/script/bsrchsbox.js>http://search.blogger.com:80/blogsearch/script/bsrchsbox.js</a></li>
+<li><a href=http://search.blogger.com/blogsearch/cscript/calpop-tight2.js>http://search.blogger.com/blogsearch/cscript/calpop-tight2.js</a></li>
+<li><a href=http://search.blogger.com/blogsearch/cscript/calpop-tight2.js>http://search.blogger.com/blogsearch/cscript/calpop-tight2.js</a></li>
+<li><a href=http://search.blogger.com/gci_91f30755d6a6b787dcc2a4062e6e9824.js>http://search.blogger.com/gci_91f30755d6a6b787dcc2a4062e6e9824.js</a></li>
+<li><a href=http://search.blogger.com/gci_91f30755d6a6b787dcc2a4062e6e9824.js>http://search.blogger.com/gci_91f30755d6a6b787dcc2a4062e6e9824.js</a></li>
+<li><a href=http://stats.blogger.com:80/index.js>http://stats.blogger.com:80/index.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20class=%22pw-widget%20pw-counter-none%22%3E%20%09%3Ca%20class=%22pw-button-facebook%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-twitter%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-linkedin%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-googleplus%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-post-share%22%3E%3C/a%3E%20%3C/div%3E%20%3Cscript%20src=%22http:/i.po.st/share/script/post-widget.js>https://www.blogger.com/%3Cdiv%20class=%22pw-widget%20pw-counter-none%22%3E%20%09%3Ca%20class=%22pw-button-facebook%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-twitter%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-linkedin%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-googleplus%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-post-share%22%3E%3C/a%3E%20%3C/div%3E%20%3Cscript%20src=%22http:/i.po.st/share/script/post-widget.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20class=%22pw-widget%20pw-counter-none%22%3E%20%09%3Ca%20class=%22pw-button-facebook%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-twitter%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-linkedin%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-googleplus%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-post-share%22%3E%3C/a%3E%20%3C/div%3E%20%3Cscript%20src=%22http:/i.po.st/share/script/post-widget.js>https://www.blogger.com/%3Cdiv%20class=%22pw-widget%20pw-counter-none%22%3E%20%09%3Ca%20class=%22pw-button-facebook%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-twitter%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-linkedin%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-googleplus%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-post-share%22%3E%3C/a%3E%20%3C/div%3E%20%3Cscript%20src=%22http:/i.po.st/share/script/post-widget.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20class=%22pw-widget%20pw-counter-none%22%3E%20%3Ca%20class=%22pw-button-facebook%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-twitter%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-linkedin%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-googleplus%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-post-share%22%3E%3C/a%3E%20%3C/div%3E%20%3Cscript%20src=%22http:/i.po.st/static/v3/post-widget.js>https://www.blogger.com/%3Cdiv%20class=%22pw-widget%20pw-counter-none%22%3E%20%3Ca%20class=%22pw-button-facebook%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-twitter%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-linkedin%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-googleplus%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-post-share%22%3E%3C/a%3E%20%3C/div%3E%20%3Cscript%20src=%22http:/i.po.st/static/v3/post-widget.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20class=%22pw-widget%20pw-counter-none%22%3E%20%3Ca%20class=%22pw-button-facebook%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-twitter%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-linkedin%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-googleplus%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-post-share%22%3E%3C/a%3E%20%3C/div%3E%20%3Cscript%20src=%22http:/i.po.st/static/v3/post-widget.js>https://www.blogger.com/%3Cdiv%20class=%22pw-widget%20pw-counter-none%22%3E%20%3Ca%20class=%22pw-button-facebook%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-twitter%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-linkedin%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-googleplus%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-post-share%22%3E%3C/a%3E%20%3C/div%3E%20%3Cscript%20src=%22http:/i.po.st/static/v3/post-widget.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%20%3Cscript%3E(function(d,%20s,%20id)%20%7B%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20if%20(d.getElementById(id))%20return;%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20js.src%20=%20%22//connect.facebook.net/en_GB/all.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%20%3Cscript%3E(function(d,%20s,%20id)%20%7B%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20if%20(d.getElementById(id))%20return;%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20js.src%20=%20%22//connect.facebook.net/en_GB/all.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%20%3Cscript%3E(function(d,%20s,%20id)%20%7B%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20if%20(d.getElementById(id))%20return;%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20js.src%20=%20%22//connect.facebook.net/en_GB/all.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%20%3Cscript%3E(function(d,%20s,%20id)%20%7B%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20if%20(d.getElementById(id))%20return;%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20js.src%20=%20%22//connect.facebook.net/en_GB/all.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%20%3Cscript%3E(function(d,%20s,%20id)%20%7B%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20if%20(d.getElementById(id))%20return;%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20js.src%20=%20%22//connect.facebook.net/en_US/all.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%20%3Cscript%3E(function(d,%20s,%20id)%20%7B%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20if%20(d.getElementById(id))%20return;%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20js.src%20=%20%22//connect.facebook.net/en_US/all.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%20%3Cscript%3E(function(d,%20s,%20id)%20%7B%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20if%20(d.getElementById(id))%20return;%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20js.src%20=%20%22//connect.facebook.net/en_US/all.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%20%3Cscript%3E(function(d,%20s,%20id)%20%7B%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20if%20(d.getElementById(id))%20return;%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20js.src%20=%20%22//connect.facebook.net/en_US/all.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)[0];%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22/connect.facebook.net/es_ES/sdk.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)[0];%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22/connect.facebook.net/es_ES/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)[0];%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22/connect.facebook.net/es_ES/sdk.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)[0];%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22/connect.facebook.net/es_ES/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/en_GB/sdk.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/en_GB/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/en_GB/sdk.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/en_GB/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/en_US/sdk.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/en_US/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/en_US/sdk.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/en_US/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/es_LA/sdk.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/es_LA/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/es_LA/sdk.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/es_LA/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/fr_FR/sdk.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/fr_FR/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/fr_FR/sdk.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/fr_FR/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/it_IT/sdk.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/it_IT/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/it_IT/sdk.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/it_IT/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/ja_JP/all.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/ja_JP/all.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/ja_JP/all.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/ja_JP/all.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/pt_BR/sdk.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/pt_BR/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/pt_BR/sdk.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/pt_BR/sdk.js</a></li>
+<li><a href=https://www.blogger.com/about/gtm.js>https://www.blogger.com/about/gtm.js</a></li>
+<li><a href=https://www.blogger.com/about/gtm.js>https://www.blogger.com/about/gtm.js</a></li>
+<li><a href=https://www.blogger.com/about/js/main.min.js>https://www.blogger.com/about/js/main.min.js</a></li>
+<li><a href=https://www.blogger.com/about/js/main.min.js>https://www.blogger.com/about/js/main.min.js</a></li>
+<li><a href=https://www.blogger.com/%C3%83%C2%AF%C3%98%C2%9F%C3%82%C2%BD/v1/common/js/1912144495-csitail.js>https://www.blogger.com/%C3%83%C2%AF%C3%98%C2%9F%C3%82%C2%BD/v1/common/js/1912144495-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%C3%83%C2%AF%C3%98%C2%9F%C3%82%C2%BD/v1/common/js/1912144495-csitail.js>https://www.blogger.com/%C3%83%C2%AF%C3%98%C2%9F%C3%82%C2%BD/v1/common/js/1912144495-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%C3%83%C2%AF%C3%98%C2%9F%C3%82%C2%BD/v1/common/js/2858158682-csitail.js>https://www.blogger.com/%C3%83%C2%AF%C3%98%C2%9F%C3%82%C2%BD/v1/common/js/2858158682-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%C3%83%C2%AF%C3%98%C2%9F%C3%82%C2%BD/v1/common/js/2858158682-csitail.js>https://www.blogger.com/%C3%83%C2%AF%C3%98%C2%9F%C3%82%C2%BD/v1/common/js/2858158682-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%C3%AF?%C2%BD?%C3%AF?%C2%BD/v1/common/js/1912144495-csitail.js>https://www.blogger.com/%C3%AF?%C2%BD?%C3%AF?%C2%BD/v1/common/js/1912144495-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%C3%AF?%C2%BD?%C3%AF?%C2%BD/v1/common/js/1912144495-csitail.js>https://www.blogger.com/%C3%AF?%C2%BD?%C3%AF?%C2%BD/v1/common/js/1912144495-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%C3%AF?%C2%BD?%C3%AF?%C2%BD/v1/common/js/2858158682-csitail.js>https://www.blogger.com/%C3%AF?%C2%BD?%C3%AF?%C2%BD/v1/common/js/2858158682-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%C3%AF?%C2%BD?%C3%AF?%C2%BD/v1/common/js/2858158682-csitail.js>https://www.blogger.com/%C3%AF?%C2%BD?%C3%AF?%C2%BD/v1/common/js/2858158682-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%C3%AF%D8%9F%C2%BD/v1/common/js/1912144495-csitail.js>https://www.blogger.com/%C3%AF%D8%9F%C2%BD/v1/common/js/1912144495-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%C3%AF%D8%9F%C2%BD/v1/common/js/1912144495-csitail.js>https://www.blogger.com/%C3%AF%D8%9F%C2%BD/v1/common/js/1912144495-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%C3%AF%D8%9F%C2%BD/v1/common/js/2858158682-csitail.js>https://www.blogger.com/%C3%AF%D8%9F%C2%BD/v1/common/js/2858158682-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%C3%AF%D8%9F%C2%BD/v1/common/js/2858158682-csitail.js>https://www.blogger.com/%C3%AF%D8%9F%C2%BD/v1/common/js/2858158682-csitail.js</a></li>
+<li><a href=https://www.blogger.com/.../common/js/168336579-csitail.js>https://www.blogger.com/.../common/js/168336579-csitail.js</a></li>
+<li><a href=https://www.blogger.com/.../common/js/168336579-csitail.js>https://www.blogger.com/.../common/js/168336579-csitail.js</a></li>
+<li><a href=https://www.blogger.com/.../common/js/1912144495-csitail.js>https://www.blogger.com/.../common/js/1912144495-csitail.js</a></li>
+<li><a href=https://www.blogger.com/.../common/js/1912144495-csitail.js>https://www.blogger.com/.../common/js/1912144495-csitail.js</a></li>
+<li><a href=https://www.blogger.com/.../common/js/2858158682-csitail.js>https://www.blogger.com/.../common/js/2858158682-csitail.js</a></li>
+<li><a href=https://www.blogger.com/.../common/js/2858158682-csitail.js>https://www.blogger.com/.../common/js/2858158682-csitail.js</a></li>
+<li><a href=https://www.blogger.com/.../common/js/545917451-csitail.js>https://www.blogger.com/.../common/js/545917451-csitail.js</a></li>
+<li><a href=https://www.blogger.com/.../common/js/545917451-csitail.js>https://www.blogger.com/.../common/js/545917451-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%E2%80%A6/v1/common/js/1912144495-csitail.js>https://www.blogger.com/%E2%80%A6/v1/common/js/1912144495-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%E2%80%A6/v1/common/js/1912144495-csitail.js>https://www.blogger.com/%E2%80%A6/v1/common/js/1912144495-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%E2%80%A6/v1/common/js/2858158682-csitail.js>https://www.blogger.com/%E2%80%A6/v1/common/js/2858158682-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%E2%80%A6/v1/common/js/2858158682-csitail.js>https://www.blogger.com/%E2%80%A6/v1/common/js/2858158682-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%E2%80%A6/v1/common/js/4174905999-csitail.js>https://www.blogger.com/%E2%80%A6/v1/common/js/4174905999-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%E2%80%A6/v1/common/js/4174905999-csitail.js>https://www.blogger.com/%E2%80%A6/v1/common/js/4174905999-csitail.js</a></li>
+<li><a href=https://www.blogger.com/.google-analytics.com/ga.js>https://www.blogger.com/.google-analytics.com/ga.js</a></li>
+<li><a href=https://www.blogger.com/.google-analytics.com/ga.js>https://www.blogger.com/.google-analytics.com/ga.js</a></li>
+<li><a href=https://www.blogger.com/.../v1/widgets/4185472346-widgets.js>https://www.blogger.com/.../v1/widgets/4185472346-widgets.js</a></li>
+<li><a href=https://www.blogger.com/.../v1/widgets/4185472346-widgets.js>https://www.blogger.com/.../v1/widgets/4185472346-widgets.js</a></li>
+<li><a href=http://www2.blogger.com:80/app/dyn-js/suggest-subdomain.js>http://www2.blogger.com:80/app/dyn-js/suggest-subdomain.js</a></li>
+<li><a href=http://www2.blogger.com:80/app/dyn-js/suggest-subdomain.js>http://www2.blogger.com:80/app/dyn-js/suggest-subdomain.js</a></li>
+<li><a href=http://www2.blogger.com:80/app/scripts/common.js>http://www2.blogger.com:80/app/scripts/common.js</a></li>
+<li><a href=http://www2.blogger.com:80/app/scripts/common.js>http://www2.blogger.com:80/app/scripts/common.js</a></li>
+<li><a href=http://www2.blogger.com:80/app/scripts/dyn-js/suggest-subdomain.js>http://www2.blogger.com:80/app/scripts/dyn-js/suggest-subdomain.js</a></li>
+<li><a href=http://www2.blogger.com:80/app/scripts/dyn-js/suggest-subdomain.js>http://www2.blogger.com:80/app/scripts/dyn-js/suggest-subdomain.js</a></li>
+<li><a href=http://www2.blogger.com/app/scripts/emaillink.js>http://www2.blogger.com/app/scripts/emaillink.js</a></li>
+<li><a href=http://www2.blogger.com/app/scripts/emaillink.js>http://www2.blogger.com/app/scripts/emaillink.js</a></li>
+<li><a href=http://www.blogger.com/%0A%0Astatic/v1/common/js/34079992%0A%0A31-csitail.js>http://www.blogger.com/%0A%0Astatic/v1/common/js/34079992%0A%0A31-csitail.js</a></li>
+<li><a href=http://www.blogger.com/%0A%0Astatic/v1/common/js/34079992%0A%0A31-csitail.js>http://www.blogger.com/%0A%0Astatic/v1/common/js/34079992%0A%0A31-csitail.js</a></li>
+<li><a href=http://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%20src=%22http://connect.facebook.net/en_US/all.js>http://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%20src=%22http://connect.facebook.net/en_US/all.js</a></li>
+<li><a href=http://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%20src=%22http://connect.facebook.net/en_US/all.js>http://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%20src=%22http://connect.facebook.net/en_US/all.js</a></li>
+<li><a href=http://www.blogger.com/%3Cscript%20height=%22315px%22%20width=%22560px%22%20src=%22http://player.ooyala.com/iframe.js>http://www.blogger.com/%3Cscript%20height=%22315px%22%20width=%22560px%22%20src=%22http://player.ooyala.com/iframe.js</a></li>
+<li><a href=http://www.blogger.com/%3Cscript%20height=%22315px%22%20width=%22560px%22%20src=%22http://player.ooyala.com/iframe.js>http://www.blogger.com/%3Cscript%20height=%22315px%22%20width=%22560px%22%20src=%22http://player.ooyala.com/iframe.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/animation_comm.js>http://www.blogger.com:80/app/scripts/animation_comm.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/animation_comm.js>http://www.blogger.com:80/app/scripts/animation_comm.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/animation_explor4we.js>http://www.blogger.com:80/app/scripts/animation_explor4we.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/animation_explor4we.js>http://www.blogger.com:80/app/scripts/animation_explor4we.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/animation.js>http://www.blogger.com:80/app/scripts/animation.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/animation.js>http://www.blogger.com:80/app/scripts/animation.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts//app/scripts/post.constants.js>http://www.blogger.com:80/app/scripts//app/scripts/post.constants.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts//app/scripts/post.constants.js>http://www.blogger.com:80/app/scripts//app/scripts/post.constants.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/backup.js>http://www.blogger.com:80/app/scripts/backup.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/backup.js>http://www.blogger.com:80/app/scripts/backup.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/blog_form_shortcuts_ie.js>http://www.blogger.com:80/app/scripts/blog_form_shortcuts_ie.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/blog_form_shortcuts_ie.js>http://www.blogger.com:80/app/scripts/blog_form_shortcuts_ie.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/detect.js>http://www.blogger.com:80/app/scripts/detect.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/detect.js>http://www.blogger.com:80/app/scripts/detect.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/dom.common.js>http://www.blogger.com:80/app/scripts/dom.common.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/dom.common.js>http://www.blogger.com:80/app/scripts/dom.common.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/dom.selection.js>http://www.blogger.com:80/app/scripts/dom.selection.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/dom.selection.js>http://www.blogger.com:80/app/scripts/dom.selection.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/event.keypress.js>http://www.blogger.com:80/app/scripts/event.keypress.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/event.keypress.js>http://www.blogger.com:80/app/scripts/event.keypress.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/form.textbar.js>http://www.blogger.com:80/app/scripts/form.textbar.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/form.textbar.js>http://www.blogger.com:80/app/scripts/form.textbar.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/highlightError.js>http://www.blogger.com:80/app/scripts/highlightError.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/highlightError.js>http://www.blogger.com:80/app/scripts/highlightError.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/post.constants.js>http://www.blogger.com:80/app/scripts/post.constants.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/post.constants.js>http://www.blogger.com:80/app/scripts/post.constants.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/post.preview.toggle.js>http://www.blogger.com:80/app/scripts/post.preview.toggle.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/post.preview.toggle.js>http://www.blogger.com:80/app/scripts/post.preview.toggle.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/richedit.common.js>http://www.blogger.com:80/app/scripts/richedit.common.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/richedit.common.js>http://www.blogger.com:80/app/scripts/richedit.common.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/richedit.textutils.js>http://www.blogger.com:80/app/scripts/richedit.textutils.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/richedit.textutils.js>http://www.blogger.com:80/app/scripts/richedit.textutils.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/suggest_subdomain.js>http://www.blogger.com:80/app/scripts/suggest_subdomain.js</a></li>
+<li><a href=http://www.blogger.com:80/app/scripts/suggest_subdomain.js>http://www.blogger.com:80/app/scripts/suggest_subdomain.js</a></li>
+<li><a href=http://www.blogger.com:80/blog-this.g?t=++--%26gt;++++We+can+add+call+back+in+node.js+in+two+ways++1.Write+a+call+back+inside+a+method++Ex:++fs.readFile(%26%2339;/abc/def%26%2339;,function(e...&u=http://www.nodemongo.asia/2013/01/call-back-in-nodejs.html?spref%3Dbl&n=Node.js+tutorials+and+MongoDB+tutorials:+Call+Back+in+node.js>http://www.blogger.com:80/blog-this.g?t=++--%26gt;++++We+can+add+call+back+in+node.js+in+two+ways++1.Write+a+call+back+inside+a+method++Ex:++fs.readFile(%26%2339;/abc/def%26%2339;,function(e...&u=http://www.nodemongo.asia/2013/01/call-back-in-nodejs.html?spref%3Dbl&n=Node.js+tutorials+and+MongoDB+tutorials:+Call+Back+in+node.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/animation_common.js>http://www.blogger.com/app/scripts/animation_common.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/animation_common.js>http://www.blogger.com/app/scripts/animation_common.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/animation_explore.js>http://www.blogger.com/app/scripts/animation_explore.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/animation_explore.js>http://www.blogger.com/app/scripts/animation_explore.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/comments.common.js>http://www.blogger.com/app/scripts/comments.common.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/comments.common.js>http://www.blogger.com/app/scripts/comments.common.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/common.js>http://www.blogger.com/app/scripts/common.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/common.js>http://www.blogger.com/app/scripts/common.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/formcheck.js>http://www.blogger.com/app/scripts/formcheck.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/formcheck.js>http://www.blogger.com/app/scripts/formcheck.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/status.js>http://www.blogger.com/app/scripts/status.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/status.js>http://www.blogger.com/app/scripts/status.js</a></li>
+<li><a href=http://www.blogger.com/.cache.js>http://www.blogger.com/.cache.js</a></li>
+<li><a href=http://www.blogger.com/.cache.js>http://www.blogger.com/.cache.js</a></li>
+<li><a href=http://www.blogger.com/.js>http://www.blogger.com/.js</a></li>
+<li><a href=http://www.blogger.com/.js>http://www.blogger.com/.js</a></li>
+<li><a href=http://www.pro2.blogger.com:80/scripts/blogger.js>http://www.pro2.blogger.com:80/scripts/blogger.js</a></li>
+<li><a href=http://www.pro2.blogger.com:80/scripts/signin.js>http://www.pro2.blogger.com:80/scripts/signin.js</a></li>
+<li><a href=http://www.wireless.blogger.com:80/scripts/blogger.js>http://www.wireless.blogger.com:80/scripts/blogger.js</a></li>
+<li><a href=http://www.wireless.blogger.com:80/scripts/netscape_widget.js>http://www.wireless.blogger.com:80/scripts/netscape_widget.js</a></li>
+<li><a href=http://www.wireless.blogger.com:80/scripts/signin.js>http://www.wireless.blogger.com:80/scripts/signin.js</a></li>
+
+      </ul>
+    </div>
+    </div>
+
+    <div class="w3-container report" id="page2" style="display: none; padding-top:22px">
+      <h4><b><i class="fa fa-dashboard"></i> Live JavaScript Links</b></h4> 
+ <input class='myInput' type='text' id='myInput2' onkeyup="myFunction('myInput2', 'myUL2')" placeholder=Search.. title=Search>
+    <div class=w3-responsive w3-card-4>
+      <ul id="myUL2" class="myUL">
+<li><a href=http://api.blogger.com/scripts/blogger.js>http://api.blogger.com/scripts/blogger.js</a></li>
+<li><a href=http://api.blogger.com/scripts/focus.js>http://api.blogger.com/scripts/focus.js</a></li>
+<li><a href=http://beta.blogger.com/app/scripts/animation_common.js>http://beta.blogger.com/app/scripts/animation_common.js</a></li>
+<li><a href=http://beta.blogger.com/app/scripts/animation_explore.js>http://beta.blogger.com/app/scripts/animation_explore.js</a></li>
+<li><a href=http://beta.blogger.com/app/scripts/detect.js>http://beta.blogger.com/app/scripts/detect.js</a></li>
+<li><a href=http://beta.blogger.com/app/scripts/dom.common.js>http://beta.blogger.com/app/scripts/dom.common.js</a></li>
+<li><a href=http://beta.blogger.com/app/scripts/editor.js>http://beta.blogger.com/app/scripts/editor.js</a></li>
+<li><a href=http://beta.blogger.com/dyn-js/backlink_count.js>http://beta.blogger.com/dyn-js/backlink_count.js</a></li>
+<li><a href=http://beta.blogger.com/js/backlink_control.js>http://beta.blogger.com/js/backlink_control.js</a></li>
+<li><a href=http://beta.blogger.com/js/backlink.js>http://beta.blogger.com/js/backlink.js</a></li>
+<li><a href=http://beta.blogger.com/js/__utm.js>http://beta.blogger.com/js/__utm.js</a></li>
+<li><a href=http://beta.blogger.com/layouts/1796965729-layouts.js>http://beta.blogger.com/layouts/1796965729-layouts.js</a></li>
+<li><a href=http://beta.blogger.com/scripts/blogger.js>http://beta.blogger.com/scripts/blogger.js</a></li>
+<li><a href=http://beta.blogger.com/scripts/browse.common.js>http://beta.blogger.com/scripts/browse.common.js</a></li>
+<li><a href=http://beta.blogger.com/scripts/emaillink.js>http://beta.blogger.com/scripts/emaillink.js</a></li>
+<li><a href=http://beta.blogger.com/scripts/focus.js>http://beta.blogger.com/scripts/focus.js</a></li>
+<li><a href=http://beta.blogger.com/scripts/netscape_widget.js>http://beta.blogger.com/scripts/netscape_widget.js</a></li>
+<li><a href=http://beta.blogger.com/v-app/scripts/1118085881-dom.common.js>http://beta.blogger.com/v-app/scripts/1118085881-dom.common.js</a></li>
+<li><a href=http://beta.blogger.com/widgets/1819633357-widgets.js>http://beta.blogger.com/widgets/1819633357-widgets.js</a></li>
+<li><a href=http://buzz.blogger.com/__utm.js>http://buzz.blogger.com/__utm.js</a></li>
+<li><a href=http://code.blogger.com/__utm.js>http://code.blogger.com/__utm.js</a></li>
+<li><a href=http://domains.blogger.com/app/scripts/animation_common.js>http://domains.blogger.com/app/scripts/animation_common.js</a></li>
+<li><a href=http://domains.blogger.com/app/scripts/animation_explore.js>http://domains.blogger.com/app/scripts/animation_explore.js</a></li>
+<li><a href=http://domains.blogger.com/app/scripts/detect.js>http://domains.blogger.com/app/scripts/detect.js</a></li>
+<li><a href=http://domains.blogger.com/app/scripts/dom.common.js>http://domains.blogger.com/app/scripts/dom.common.js</a></li>
+<li><a href=http://domains.blogger.com/scripts/browse.common.js>http://domains.blogger.com/scripts/browse.common.js</a></li>
+<li><a href=http://domains.blogger.com/scripts/focus.js>http://domains.blogger.com/scripts/focus.js</a></li>
+<li><a href=http://help.blogger.com/scripts/blogger.js>http://help.blogger.com/scripts/blogger.js</a></li>
+<li><a href=http://photos.blogger.com/app/scripts/dom.common.js>http://photos.blogger.com/app/scripts/dom.common.js</a></li>
+<li><a href=http://photos.blogger.com/js/__utm.js>http://photos.blogger.com/js/__utm.js</a></li>
+<li><a href=http://pro2.blogger.com/scripts/blog_form_shortcuts_ie.js>http://pro2.blogger.com/scripts/blog_form_shortcuts_ie.js</a></li>
+<li><a href=http://pro2.blogger.com/scripts/raiseButtons_form.js>http://pro2.blogger.com/scripts/raiseButtons_form.js</a></li>
+<li><a href=http://pro2.blogger.com/scripts/spch.js>http://pro2.blogger.com/scripts/spch.js</a></li>
+<li><a href=http://pro2.blogger.com/scripts/toolbar.js>http://pro2.blogger.com/scripts/toolbar.js</a></li>
+<li><a href=http://pro.blogger.com/scripts/blog_form_shortcuts_ie.js>http://pro.blogger.com/scripts/blog_form_shortcuts_ie.js</a></li>
+<li><a href=http://pro.blogger.com/scripts/netscape_widget.js>http://pro.blogger.com/scripts/netscape_widget.js</a></li>
+<li><a href=http://pro.blogger.com/scripts/raiseButtons_form.js>http://pro.blogger.com/scripts/raiseButtons_form.js</a></li>
+<li><a href=http://pro.blogger.com/scripts/raiseButtons_moz.js>http://pro.blogger.com/scripts/raiseButtons_moz.js</a></li>
+<li><a href=http://pro.blogger.com/scripts/spch.js>http://pro.blogger.com/scripts/spch.js</a></li>
+<li><a href=https://beta.blogger.com/app/scripts/comments.common.js>https://beta.blogger.com/app/scripts/comments.common.js</a></li>
+<li><a href=https://beta.blogger.com/app/scripts/common.js>https://beta.blogger.com/app/scripts/common.js</a></li>
+<li><a href=https://beta.blogger.com/app/scripts/emaillink.js>https://beta.blogger.com/app/scripts/emaillink.js</a></li>
+<li><a href=https://beta.blogger.com/app/scripts/formcheck.js>https://beta.blogger.com/app/scripts/formcheck.js</a></li>
+<li><a href=https://beta.blogger.com/dyn-js/backlink.js>https://beta.blogger.com/dyn-js/backlink.js</a></li>
+<li><a href=https://beta.blogger.com/js/cookies.common.js>https://beta.blogger.com/js/cookies.common.js</a></li>
+<li><a href=https://beta.blogger.com/v-app/scripts/1019856700-common.js>https://beta.blogger.com/v-app/scripts/1019856700-common.js</a></li>
+<li><a href=https://beta.blogger.com/v-app/scripts/107652916-dom.common.js>https://beta.blogger.com/v-app/scripts/107652916-dom.common.js</a></li>
+<li><a href=https://beta.blogger.com/v-js/3625575137-cookies.common.js>https://beta.blogger.com/v-js/3625575137-cookies.common.js</a></li>
+<li><a href=https://beta.blogger.com/widgets/1638859070-widgets.js>https://beta.blogger.com/widgets/1638859070-widgets.js</a></li>
+<li><a href=https://beta.blogger.com/widgets/2200193613-widgets.js>https://beta.blogger.com/widgets/2200193613-widgets.js</a></li>
+<li><a href=https://beta.blogger.com/widgets/2413301736-widgets.js>https://beta.blogger.com/widgets/2413301736-widgets.js</a></li>
+<li><a href=https://beta.blogger.com/widgets/2611175964-widgets.js>https://beta.blogger.com/widgets/2611175964-widgets.js</a></li>
+<li><a href=https://beta.blogger.com/widgets/2662811415-widgets.js>https://beta.blogger.com/widgets/2662811415-widgets.js</a></li>
+<li><a href=https://beta.blogger.com/widgets/3229027966-widgets.js>https://beta.blogger.com/widgets/3229027966-widgets.js</a></li>
+<li><a href=https://beta.blogger.com/widgets/3611446312-widgets.js>https://beta.blogger.com/widgets/3611446312-widgets.js</a></li>
+<li><a href=https://beta.blogger.com/widgets/94464370-widgets.js>https://beta.blogger.com/widgets/94464370-widgets.js</a></li>
+<li><a href=https://blogger.com/AC_OETags.js>https://blogger.com/AC_OETags.js</a></li>
+<li><a href=https://blogger.com/....js>https://blogger.com/....js</a></li>
+<li><a href=https://bp2.blogger.com/static/js/jwplayer/jwplayer.js>https://bp2.blogger.com/static/js/jwplayer/jwplayer.js</a></li>
+<li><a href=https://bp2.blogger.com/static/js/video-embed-rewriter.js>https://bp2.blogger.com/static/js/video-embed-rewriter.js</a></li>
+<li><a href=https://buzz.blogger.com/2011/01/google-analytics.com/ga.js>https://buzz.blogger.com/2011/01/google-analytics.com/ga.js</a></li>
+<li><a href=https://buzz.blogger.com/2012/02/.gstatic.com/feedback/api.js>https://buzz.blogger.com/2012/02/.gstatic.com/feedback/api.js</a></li>
+<li><a href=https://buzz.blogger.com/2012/07/.google-analytics.com/ga.js>https://buzz.blogger.com/2012/07/.google-analytics.com/ga.js</a></li>
+<li><a href=https://buzz.blogger.com/build/yuiloader/yuiloader.js>https://buzz.blogger.com/build/yuiloader/yuiloader.js</a></li>
+<li><a href=https://buzz.blogger.com/build/yuiloader/yuiloader-min.js>https://buzz.blogger.com/build/yuiloader/yuiloader-min.js</a></li>
+<li><a href=https://buzz.blogger.com/build/yui/yui.js>https://buzz.blogger.com/build/yui/yui.js</a></li>
+<li><a href=https://buzz.blogger.com/build/yui/yui-min.js>https://buzz.blogger.com/build/yui/yui-min.js</a></li>
+<li><a href=https://buzz.blogger.com/CFInstall.js>https://buzz.blogger.com/CFInstall.js</a></li>
+<li><a href=https://buzz.blogger.com/CFInstall.min.js>https://buzz.blogger.com/CFInstall.min.js</a></li>
+<li><a href=https://buzz.blogger.com/default.I.js>https://buzz.blogger.com/default.I.js</a></li>
+<li><a href=https://buzz.blogger.com/dojo/dojo.js>https://buzz.blogger.com/dojo/dojo.js</a></li>
+<li><a href=https://buzz.blogger.com/dojo/dojo.xd.js>https://buzz.blogger.com/dojo/dojo.xd.js</a></li>
+<li><a href=https://buzz.blogger.com/ext-core-debug.js>https://buzz.blogger.com/ext-core-debug.js</a></li>
+<li><a href=https://buzz.blogger.com/ext-core.js>https://buzz.blogger.com/ext-core.js</a></li>
+<li><a href=https://buzz.blogger.com/.google-analytics.com/ga.js>https://buzz.blogger.com/.google-analytics.com/ga.js</a></li>
+<li><a href=https://buzz.blogger.com/__help-utm.js>https://buzz.blogger.com/__help-utm.js</a></li>
+<li><a href=https://buzz.blogger.com/jquery.js>https://buzz.blogger.com/jquery.js</a></li>
+<li><a href=https://buzz.blogger.com/jquery.min.js>https://buzz.blogger.com/jquery.min.js</a></li>
+<li><a href=https://buzz.blogger.com/jquery-ui.js>https://buzz.blogger.com/jquery-ui.js</a></li>
+<li><a href=https://buzz.blogger.com/jquery-ui.min.js>https://buzz.blogger.com/jquery-ui.min.js</a></li>
+<li><a href=https://buzz.blogger.com/js/cookiechoices.js>https://buzz.blogger.com/js/cookiechoices.js</a></li>
+<li><a href=https://buzz.blogger.com/mootools.js>https://buzz.blogger.com/mootools.js</a></li>
+<li><a href=https://buzz.blogger.com/mootools-yui-compressed.js>https://buzz.blogger.com/mootools-yui-compressed.js</a></li>
+<li><a href=https://buzz.blogger.com/prototype.js>https://buzz.blogger.com/prototype.js</a></li>
+<li><a href=https://buzz.blogger.com/scriptaculous.js>https://buzz.blogger.com/scriptaculous.js</a></li>
+<li><a href=https://buzz.blogger.com/swfobject.js>https://buzz.blogger.com/swfobject.js</a></li>
+<li><a href=https://buzz.blogger.com/swfobject_src.js>https://buzz.blogger.com/swfobject_src.js</a></li>
+<li><a href=https://buzz.blogger.com/webfont_debug.js>https://buzz.blogger.com/webfont_debug.js</a></li>
+<li><a href=https://buzz.blogger.com/webfont.js>https://buzz.blogger.com/webfont.js</a></li>
+<li><a href=https://code.blogger.com/build/yuiloader/yuiloader.js>https://code.blogger.com/build/yuiloader/yuiloader.js</a></li>
+<li><a href=https://code.blogger.com/build/yuiloader/yuiloader-min.js>https://code.blogger.com/build/yuiloader/yuiloader-min.js</a></li>
+<li><a href=https://code.blogger.com/build/yui/yui.js>https://code.blogger.com/build/yui/yui.js</a></li>
+<li><a href=https://code.blogger.com/build/yui/yui-min.js>https://code.blogger.com/build/yui/yui-min.js</a></li>
+<li><a href=https://code.blogger.com/CFInstall.js>https://code.blogger.com/CFInstall.js</a></li>
+<li><a href=https://code.blogger.com/CFInstall.min.js>https://code.blogger.com/CFInstall.min.js</a></li>
+<li><a href=https://code.blogger.com/dd-level-menu.js>https://code.blogger.com/dd-level-menu.js</a></li>
+<li><a href=https://code.blogger.com/default+en.I.js>https://code.blogger.com/default+en.I.js</a></li>
+<li><a href=https://code.blogger.com/default.I.js>https://code.blogger.com/default.I.js</a></li>
+<li><a href=https://code.blogger.com/dojo/dojo.js>https://code.blogger.com/dojo/dojo.js</a></li>
+<li><a href=https://code.blogger.com/dojo/dojo.js.uncompressed.js>https://code.blogger.com/dojo/dojo.js.uncompressed.js</a></li>
+<li><a href=https://code.blogger.com/dojo/dojo.xd.js>https://code.blogger.com/dojo/dojo.xd.js</a></li>
+<li><a href=https://code.blogger.com/dojo/dojo.xd.js.uncompressed.js>https://code.blogger.com/dojo/dojo.xd.js.uncompressed.js</a></li>
+<li><a href=https://code.blogger.com/ext-core-debug.js>https://code.blogger.com/ext-core-debug.js</a></li>
+<li><a href=https://code.blogger.com/ext-core.js>https://code.blogger.com/ext-core.js</a></li>
+<li><a href=https://code.blogger.com/.gstatic.com/feedback/api.js>https://code.blogger.com/.gstatic.com/feedback/api.js</a></li>
+<li><a href=https://code.blogger.com/jquery.js>https://code.blogger.com/jquery.js</a></li>
+<li><a href=https://code.blogger.com/jquery.min.js>https://code.blogger.com/jquery.min.js</a></li>
+<li><a href=https://code.blogger.com/jquery-ui.js>https://code.blogger.com/jquery-ui.js</a></li>
+<li><a href=https://code.blogger.com/jquery-ui.min.js>https://code.blogger.com/jquery-ui.min.js</a></li>
+<li><a href=https://code.blogger.com/.js>https://code.blogger.com/.js</a></li>
+<li><a href=https://code.blogger.com/mootools.js>https://code.blogger.com/mootools.js</a></li>
+<li><a href=https://code.blogger.com/mootools-yui-compressed.js>https://code.blogger.com/mootools-yui-compressed.js</a></li>
+<li><a href=https://code.blogger.com/prototype.js>https://code.blogger.com/prototype.js</a></li>
+<li><a href=https://code.blogger.com/scriptaculous.js>https://code.blogger.com/scriptaculous.js</a></li>
+<li><a href=https://code.blogger.com/swfobject.js>https://code.blogger.com/swfobject.js</a></li>
+<li><a href=https://code.blogger.com/swfobject_src.js>https://code.blogger.com/swfobject_src.js</a></li>
+<li><a href=https://code.blogger.com/webfont_debug.js>https://code.blogger.com/webfont_debug.js</a></li>
+<li><a href=https://code.blogger.com/webfont.js>https://code.blogger.com/webfont.js</a></li>
+<li><a href=https://draft.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%20%3Cscript%3E(function(d,%20s,%20id)%20%7B%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20if%20(d.getElementById(id))%20return;%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20js.src%20=%20%22//connect.facebook.net/de_DE/all.js>https://draft.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%20%3Cscript%3E(function(d,%20s,%20id)%20%7B%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20if%20(d.getElementById(id))%20return;%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20js.src%20=%20%22//connect.facebook.net/de_DE/all.js</a></li>
+<li><a href=https://draft.blogger.com/about/js/main.min.js>https://draft.blogger.com/about/js/main.min.js</a></li>
+<li><a href=https://draft.blogger.com/app/scripts/emaillink.js>https://draft.blogger.com/app/scripts/emaillink.js</a></li>
+<li><a href=https://draft.blogger.com/blogin.g?blogspotURL=https://pm-modi-berozgaar-bhatta-yojnabero.blogspot.com/jquery.tools.min.js>https://draft.blogger.com/blogin.g?blogspotURL=https://pm-modi-berozgaar-bhatta-yojnabero.blogspot.com/jquery.tools.min.js</a></li>
+<li><a href=https://draft.blogger.com/dyn-js/backlink_count.js>https://draft.blogger.com/dyn-js/backlink_count.js</a></li>
+<li><a href=https://draft.blogger.com/feeds/19160405/posts/D3.js>https://draft.blogger.com/feeds/19160405/posts/D3.js</a></li>
+<li><a href=https://draft.blogger.com/feeds/5532324792230149469/posts/nuxt.js>https://draft.blogger.com/feeds/5532324792230149469/posts/nuxt.js</a></li>
+<li><a href=https://draft.blogger.com/gci_91f30755d6a6b787dcc2a4062e6e9824.js>https://draft.blogger.com/gci_91f30755d6a6b787dcc2a4062e6e9824.js</a></li>
+<li><a href=https://draft.blogger.com/profile/gci_91f30755d6a6b787dcc2a4062e6e9824.js>https://draft.blogger.com/profile/gci_91f30755d6a6b787dcc2a4062e6e9824.js</a></li>
+<li><a href=https://draft.blogger.com/profile/.google-analytics.com/ga.js>https://draft.blogger.com/profile/.google-analytics.com/ga.js</a></li>
+<li><a href=http://search.blogger.com/blogsearch/script/bsrchapp.js>http://search.blogger.com/blogsearch/script/bsrchapp.js</a></li>
+<li><a href=http://search.blogger.com/blogsearch/script/bsrchnbar.js>http://search.blogger.com/blogsearch/script/bsrchnbar.js</a></li>
+<li><a href=http://search.blogger.com/blogsearch/script/bsrchsbox.js>http://search.blogger.com/blogsearch/script/bsrchsbox.js</a></li>
+<li><a href=https://help.blogger.com/bin/resource/urchin_util.js>https://help.blogger.com/bin/resource/urchin_util.js</a></li>
+<li><a href=https://help.blogger.com/bin/static.py?page=__utm.js>https://help.blogger.com/bin/static.py?page=__utm.js</a></li>
+<li><a href=https://pro.blogger.com/scripts/blogger.js>https://pro.blogger.com/scripts/blogger.js</a></li>
+<li><a href=https://pro.blogger.com/scripts/signin.js>https://pro.blogger.com/scripts/signin.js</a></li>
+<li><a href=https://search.blogger.com/blogsearch/cscript/calpop-tight2.js>https://search.blogger.com/blogsearch/cscript/calpop-tight2.js</a></li>
+<li><a href=https://search.blogger.com/gci_91f30755d6a6b787dcc2a4062e6e9824.js>https://search.blogger.com/gci_91f30755d6a6b787dcc2a4062e6e9824.js</a></li>
+<li><a href=https://www2.blogger.com/app/scripts/emaillink.js>https://www2.blogger.com/app/scripts/emaillink.js</a></li>
+<li><a href=https://www.blogger.com/%0A%0Astatic/v1/common/js/34079992%0A%0A31-csitail.js>https://www.blogger.com/%0A%0Astatic/v1/common/js/34079992%0A%0A31-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20class=%22pw-widget%20pw-counter-none%22%3E%20%09%3Ca%20class=%22pw-button-facebook%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-twitter%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-linkedin%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-googleplus%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-post-share%22%3E%3C/a%3E%20%3C/div%3E%20%3Cscript%20src=%22http:/i.po.st/share/script/post-widget.js>https://www.blogger.com/%3Cdiv%20class=%22pw-widget%20pw-counter-none%22%3E%20%09%3Ca%20class=%22pw-button-facebook%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-twitter%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-linkedin%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-googleplus%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-post-share%22%3E%3C/a%3E%20%3C/div%3E%20%3Cscript%20src=%22http:/i.po.st/share/script/post-widget.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20class=%22pw-widget%20pw-counter-none%22%3E%20%3Ca%20class=%22pw-button-facebook%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-twitter%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-linkedin%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-googleplus%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-post-share%22%3E%3C/a%3E%20%3C/div%3E%20%3Cscript%20src=%22http:/i.po.st/static/v3/post-widget.js>https://www.blogger.com/%3Cdiv%20class=%22pw-widget%20pw-counter-none%22%3E%20%3Ca%20class=%22pw-button-facebook%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-twitter%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-linkedin%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-googleplus%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-post-share%22%3E%3C/a%3E%20%3C/div%3E%20%3Cscript%20src=%22http:/i.po.st/static/v3/post-widget.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%20%3Cscript%3E(function(d,%20s,%20id)%20%7B%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20if%20(d.getElementById(id))%20return;%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20js.src%20=%20%22//connect.facebook.net/en_GB/all.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%20%3Cscript%3E(function(d,%20s,%20id)%20%7B%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20if%20(d.getElementById(id))%20return;%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20js.src%20=%20%22//connect.facebook.net/en_GB/all.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%20%3Cscript%3E(function(d,%20s,%20id)%20%7B%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20if%20(d.getElementById(id))%20return;%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20js.src%20=%20%22//connect.facebook.net/en_US/all.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%20%3Cscript%3E(function(d,%20s,%20id)%20%7B%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20if%20(d.getElementById(id))%20return;%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20js.src%20=%20%22//connect.facebook.net/en_US/all.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%20src=%22http://connect.facebook.net/en_US/all.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%20src=%22http://connect.facebook.net/en_US/all.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)[0];%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22/connect.facebook.net/es_ES/sdk.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)[0];%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22/connect.facebook.net/es_ES/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/en_GB/sdk.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/en_GB/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/en_US/sdk.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/en_US/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/es_LA/sdk.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/es_LA/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/fr_FR/sdk.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/fr_FR/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/it_IT/sdk.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/it_IT/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/ja_JP/all.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/ja_JP/all.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/pt_BR/sdk.js>https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/pt_BR/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cscript%20height=%22315px%22%20width=%22560px%22%20src=%22http://player.ooyala.com/iframe.js>https://www.blogger.com/%3Cscript%20height=%22315px%22%20width=%22560px%22%20src=%22http://player.ooyala.com/iframe.js</a></li>
+<li><a href=https://www.blogger.com/about/gtm.js>https://www.blogger.com/about/gtm.js</a></li>
+<li><a href=https://www.blogger.com/about/js/main.min.js>https://www.blogger.com/about/js/main.min.js</a></li>
+<li><a href=https://www.blogger.com/app/scripts/animation_common.js>https://www.blogger.com/app/scripts/animation_common.js</a></li>
+<li><a href=https://www.blogger.com/app/scripts/animation_explore.js>https://www.blogger.com/app/scripts/animation_explore.js</a></li>
+<li><a href=https://www.blogger.com/app/scripts/comments.common.js>https://www.blogger.com/app/scripts/comments.common.js</a></li>
+<li><a href=https://www.blogger.com/app/scripts/common.js>https://www.blogger.com/app/scripts/common.js</a></li>
+<li><a href=https://www.blogger.com/app/scripts/formcheck.js>https://www.blogger.com/app/scripts/formcheck.js</a></li>
+<li><a href=https://www.blogger.com/app/scripts/status.js>https://www.blogger.com/app/scripts/status.js</a></li>
+<li><a href=https://www.blogger.com/%C3%83%C2%AF%C3%98%C2%9F%C3%82%C2%BD/v1/common/js/1912144495-csitail.js>https://www.blogger.com/%C3%83%C2%AF%C3%98%C2%9F%C3%82%C2%BD/v1/common/js/1912144495-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%C3%83%C2%AF%C3%98%C2%9F%C3%82%C2%BD/v1/common/js/2858158682-csitail.js>https://www.blogger.com/%C3%83%C2%AF%C3%98%C2%9F%C3%82%C2%BD/v1/common/js/2858158682-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%C3%AF?%C2%BD?%C3%AF?%C2%BD/v1/common/js/1912144495-csitail.js>https://www.blogger.com/%C3%AF?%C2%BD?%C3%AF?%C2%BD/v1/common/js/1912144495-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%C3%AF?%C2%BD?%C3%AF?%C2%BD/v1/common/js/2858158682-csitail.js>https://www.blogger.com/%C3%AF?%C2%BD?%C3%AF?%C2%BD/v1/common/js/2858158682-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%C3%AF%D8%9F%C2%BD/v1/common/js/1912144495-csitail.js>https://www.blogger.com/%C3%AF%D8%9F%C2%BD/v1/common/js/1912144495-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%C3%AF%D8%9F%C2%BD/v1/common/js/2858158682-csitail.js>https://www.blogger.com/%C3%AF%D8%9F%C2%BD/v1/common/js/2858158682-csitail.js</a></li>
+<li><a href=https://www.blogger.com/.cache.js>https://www.blogger.com/.cache.js</a></li>
+<li><a href=https://www.blogger.com/.../common/js/168336579-csitail.js>https://www.blogger.com/.../common/js/168336579-csitail.js</a></li>
+<li><a href=https://www.blogger.com/.../common/js/1912144495-csitail.js>https://www.blogger.com/.../common/js/1912144495-csitail.js</a></li>
+<li><a href=https://www.blogger.com/.../common/js/2858158682-csitail.js>https://www.blogger.com/.../common/js/2858158682-csitail.js</a></li>
+<li><a href=https://www.blogger.com/.../common/js/545917451-csitail.js>https://www.blogger.com/.../common/js/545917451-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%E2%80%A6/v1/common/js/1912144495-csitail.js>https://www.blogger.com/%E2%80%A6/v1/common/js/1912144495-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%E2%80%A6/v1/common/js/2858158682-csitail.js>https://www.blogger.com/%E2%80%A6/v1/common/js/2858158682-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%E2%80%A6/v1/common/js/4174905999-csitail.js>https://www.blogger.com/%E2%80%A6/v1/common/js/4174905999-csitail.js</a></li>
+<li><a href=https://www.blogger.com/.google-analytics.com/ga.js>https://www.blogger.com/.google-analytics.com/ga.js</a></li>
+<li><a href=https://www.blogger.com/.js>https://www.blogger.com/.js</a></li>
+<li><a href=https://www.blogger.com/.../v1/widgets/4185472346-widgets.js>https://www.blogger.com/.../v1/widgets/4185472346-widgets.js</a></li>
+<li><a href=http://www2.blogger.com/app/dyn-js/suggest-subdomain.js>http://www2.blogger.com/app/dyn-js/suggest-subdomain.js</a></li>
+<li><a href=http://www2.blogger.com/app/scripts/common.js>http://www2.blogger.com/app/scripts/common.js</a></li>
+<li><a href=http://www2.blogger.com/app/scripts/dyn-js/suggest-subdomain.js>http://www2.blogger.com/app/scripts/dyn-js/suggest-subdomain.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/animation_comm.js>http://www.blogger.com/app/scripts/animation_comm.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/animation_explor4we.js>http://www.blogger.com/app/scripts/animation_explor4we.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/animation.js>http://www.blogger.com/app/scripts/animation.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts//app/scripts/post.constants.js>http://www.blogger.com/app/scripts//app/scripts/post.constants.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/backup.js>http://www.blogger.com/app/scripts/backup.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/blog_form_shortcuts_ie.js>http://www.blogger.com/app/scripts/blog_form_shortcuts_ie.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/detect.js>http://www.blogger.com/app/scripts/detect.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/dom.common.js>http://www.blogger.com/app/scripts/dom.common.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/dom.selection.js>http://www.blogger.com/app/scripts/dom.selection.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/event.keypress.js>http://www.blogger.com/app/scripts/event.keypress.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/form.textbar.js>http://www.blogger.com/app/scripts/form.textbar.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/highlightError.js>http://www.blogger.com/app/scripts/highlightError.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/post.constants.js>http://www.blogger.com/app/scripts/post.constants.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/post.preview.toggle.js>http://www.blogger.com/app/scripts/post.preview.toggle.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/richedit.common.js>http://www.blogger.com/app/scripts/richedit.common.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/richedit.textutils.js>http://www.blogger.com/app/scripts/richedit.textutils.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/suggest_subdomain.js>http://www.blogger.com/app/scripts/suggest_subdomain.js</a></li>
+<li><a href=http://www.blogger.com/blog-this.g?t=++--%26gt;++++We+can+add+call+back+in+node.js+in+two+ways++1.Write+a+call+back+inside+a+method++Ex:++fs.readFile(%26%2339;/abc/def%26%2339;,function(e...&u=http://www.nodemongo.asia/2013/01/call-back-in-nodejs.html?spref%3Dbl&n=Node.js+tutorials+and+MongoDB+tutorials:+Call+Back+in+node.js>http://www.blogger.com/blog-this.g?t=++--%26gt;++++We+can+add+call+back+in+node.js+in+two+ways++1.Write+a+call+back+inside+a+method++Ex:++fs.readFile(%26%2339;/abc/def%26%2339;,function(e...&u=http://www.nodemongo.asia/2013/01/call-back-in-nodejs.html?spref%3Dbl&n=Node.js+tutorials+and+MongoDB+tutorials:+Call+Back+in+node.js</a></li>
+
+      </ul>
+    </div>
+    </div>
+
+    <div class="w3-container report" id="page3" style="display: none; padding-top:22px">
+      <h4><b><i class="fa fa-dashboard"></i> Endpoints</b></h4>
+<div class=w3-responsive w3-card-4><pre1><strong>Press Ctrl + F to Search!</strong></pre1></div>
+    <div class=w3-responsive w3-card-4>
+      <ul id="myUL3" class="myUL">
+<li><a href=#>No Jslinks Links Found For Target</a></li>
+
+      </ul>
+    </div>
+    </div>
+
+
+      <div class="w3-container report" id="page4" style="display: none; padding-top:22px">
+        <h4><b><i class="fa fa-dashboard"></i> Secrets</b></h4>
+ <div class=w3-responsive w3-card-4><pre1><strong>Press Ctrl + F to Search!</strong></pre1></div>
+  <div class=w3-responsive w3-card-4>
+      <ul id="myUL4" class="myUL">
+<li><a href=#>No Jslinks Links Found For Target</a></li>
+
+      </ul>
+    </div>
+    </div>
+
+        <div class="w3-container report" id="page5" style="display: none; padding-top:22px">
+          <h4><b><i class="fa fa-dashboard"></i> Wordlist</b></h4>
+ <div class=w3-responsive w3-card-4><pre1><strong>Press Ctrl + F to Search!</strong></pre1></div>
+    <div class=w3-responsive w3-card-4>
+      <ul id="myUL5" class="myUL">
+<pre><code></code></pre>
+
+      </ul>
+    </div>
+    </div>
+
+
+          <div class="w3-container report" id="page6" style="display: none; padding-top:22px">
+            <h4><b><i class="fa fa-dashboard"></i> Variables</b></h4>
+ <div class=w3-responsive w3-card-4><pre1><strong>Press Ctrl + F to Search!</strong></pre1></div>
+    <div class=w3-responsive w3-card-4>
+      <ul id="myUL6" class="myUL">
+<pre><code></code></pre>
+
+      </ul>
+    </div>
+    </div>
+
+            <div class="w3-container report" id="page7" style="display: none; padding-top:22px">
+              <h4><b><i class="fa fa-dashboard"></i> DOM XSS</b></h4>
+ <div class=w3-responsive w3-card-4><pre1><strong>Press Ctrl + F to Search!</strong></pre1></div>
+    <div class=w3-responsive w3-card-4>
+      <ul id="myUL7" class="myUL">
+<li><a href=#>No Jslinks Links Found For Target</a></li>
+
+      </ul>
+    </div>
+    </div>
+
+              <div class="w3-container report" id="page8" style="display: none; padding-top:22px">
+                <h4><b><i class="fa fa-dashboard"></i> JSFiles For Manualy Testing</b></h4>
+ <input class='myInput' type='text' id='myInput8' onkeyup="myFunction('myInput8', 'myUL8')" placeholder=Search.. title=Search>
+    <div class=w3-responsive w3-card-4>
+      <ul id="myUL8" class="myUL">
+<li><a href=http://api.blogger.com/scripts/blogger.js target=_blank >http://api.blogger.com/scripts/blogger.js</a></li>
+<li><a href=http://api.blogger.com/scripts/focus.js target=_blank >http://api.blogger.com/scripts/focus.js</a></li>
+<li><a href=http://beta.blogger.com/app/scripts/animation_common.js target=_blank >http://beta.blogger.com/app/scripts/animation_common.js</a></li>
+<li><a href=http://beta.blogger.com/app/scripts/animation_explore.js target=_blank >http://beta.blogger.com/app/scripts/animation_explore.js</a></li>
+<li><a href=http://beta.blogger.com/app/scripts/detect.js target=_blank >http://beta.blogger.com/app/scripts/detect.js</a></li>
+<li><a href=http://beta.blogger.com/app/scripts/dom.common.js target=_blank >http://beta.blogger.com/app/scripts/dom.common.js</a></li>
+<li><a href=http://beta.blogger.com/app/scripts/editor.js target=_blank >http://beta.blogger.com/app/scripts/editor.js</a></li>
+<li><a href=http://beta.blogger.com/dyn-js/backlink_count.js target=_blank >http://beta.blogger.com/dyn-js/backlink_count.js</a></li>
+<li><a href=http://beta.blogger.com/js/backlink_control.js target=_blank >http://beta.blogger.com/js/backlink_control.js</a></li>
+<li><a href=http://beta.blogger.com/js/backlink.js target=_blank >http://beta.blogger.com/js/backlink.js</a></li>
+<li><a href=http://beta.blogger.com/js/__utm.js target=_blank >http://beta.blogger.com/js/__utm.js</a></li>
+<li><a href=http://beta.blogger.com/layouts/1796965729-layouts.js target=_blank >http://beta.blogger.com/layouts/1796965729-layouts.js</a></li>
+<li><a href=http://beta.blogger.com/scripts/blogger.js target=_blank >http://beta.blogger.com/scripts/blogger.js</a></li>
+<li><a href=http://beta.blogger.com/scripts/browse.common.js target=_blank >http://beta.blogger.com/scripts/browse.common.js</a></li>
+<li><a href=http://beta.blogger.com/scripts/emaillink.js target=_blank >http://beta.blogger.com/scripts/emaillink.js</a></li>
+<li><a href=http://beta.blogger.com/scripts/focus.js target=_blank >http://beta.blogger.com/scripts/focus.js</a></li>
+<li><a href=http://beta.blogger.com/scripts/netscape_widget.js target=_blank >http://beta.blogger.com/scripts/netscape_widget.js</a></li>
+<li><a href=http://beta.blogger.com/v-app/scripts/1118085881-dom.common.js target=_blank >http://beta.blogger.com/v-app/scripts/1118085881-dom.common.js</a></li>
+<li><a href=http://beta.blogger.com/widgets/1819633357-widgets.js target=_blank >http://beta.blogger.com/widgets/1819633357-widgets.js</a></li>
+<li><a href=http://buzz.blogger.com/__utm.js target=_blank >http://buzz.blogger.com/__utm.js</a></li>
+<li><a href=http://code.blogger.com/__utm.js target=_blank >http://code.blogger.com/__utm.js</a></li>
+<li><a href=http://domains.blogger.com/app/scripts/animation_common.js target=_blank >http://domains.blogger.com/app/scripts/animation_common.js</a></li>
+<li><a href=http://domains.blogger.com/app/scripts/animation_explore.js target=_blank >http://domains.blogger.com/app/scripts/animation_explore.js</a></li>
+<li><a href=http://domains.blogger.com/app/scripts/detect.js target=_blank >http://domains.blogger.com/app/scripts/detect.js</a></li>
+<li><a href=http://domains.blogger.com/app/scripts/dom.common.js target=_blank >http://domains.blogger.com/app/scripts/dom.common.js</a></li>
+<li><a href=http://domains.blogger.com/scripts/browse.common.js target=_blank >http://domains.blogger.com/scripts/browse.common.js</a></li>
+<li><a href=http://domains.blogger.com/scripts/focus.js target=_blank >http://domains.blogger.com/scripts/focus.js</a></li>
+<li><a href=http://help.blogger.com/scripts/blogger.js target=_blank >http://help.blogger.com/scripts/blogger.js</a></li>
+<li><a href=http://photos.blogger.com/app/scripts/dom.common.js target=_blank >http://photos.blogger.com/app/scripts/dom.common.js</a></li>
+<li><a href=http://photos.blogger.com/js/__utm.js target=_blank >http://photos.blogger.com/js/__utm.js</a></li>
+<li><a href=http://pro2.blogger.com/scripts/blog_form_shortcuts_ie.js target=_blank >http://pro2.blogger.com/scripts/blog_form_shortcuts_ie.js</a></li>
+<li><a href=http://pro2.blogger.com/scripts/raiseButtons_form.js target=_blank >http://pro2.blogger.com/scripts/raiseButtons_form.js</a></li>
+<li><a href=http://pro2.blogger.com/scripts/spch.js target=_blank >http://pro2.blogger.com/scripts/spch.js</a></li>
+<li><a href=http://pro2.blogger.com/scripts/toolbar.js target=_blank >http://pro2.blogger.com/scripts/toolbar.js</a></li>
+<li><a href=http://pro.blogger.com/scripts/blog_form_shortcuts_ie.js target=_blank >http://pro.blogger.com/scripts/blog_form_shortcuts_ie.js</a></li>
+<li><a href=http://pro.blogger.com/scripts/netscape_widget.js target=_blank >http://pro.blogger.com/scripts/netscape_widget.js</a></li>
+<li><a href=http://pro.blogger.com/scripts/raiseButtons_form.js target=_blank >http://pro.blogger.com/scripts/raiseButtons_form.js</a></li>
+<li><a href=http://pro.blogger.com/scripts/raiseButtons_moz.js target=_blank >http://pro.blogger.com/scripts/raiseButtons_moz.js</a></li>
+<li><a href=http://pro.blogger.com/scripts/spch.js target=_blank >http://pro.blogger.com/scripts/spch.js</a></li>
+<li><a href=https://beta.blogger.com/app/scripts/comments.common.js target=_blank >https://beta.blogger.com/app/scripts/comments.common.js</a></li>
+<li><a href=https://beta.blogger.com/app/scripts/common.js target=_blank >https://beta.blogger.com/app/scripts/common.js</a></li>
+<li><a href=https://beta.blogger.com/app/scripts/emaillink.js target=_blank >https://beta.blogger.com/app/scripts/emaillink.js</a></li>
+<li><a href=https://beta.blogger.com/app/scripts/formcheck.js target=_blank >https://beta.blogger.com/app/scripts/formcheck.js</a></li>
+<li><a href=https://beta.blogger.com/dyn-js/backlink.js target=_blank >https://beta.blogger.com/dyn-js/backlink.js</a></li>
+<li><a href=https://beta.blogger.com/js/cookies.common.js target=_blank >https://beta.blogger.com/js/cookies.common.js</a></li>
+<li><a href=https://beta.blogger.com/v-app/scripts/1019856700-common.js target=_blank >https://beta.blogger.com/v-app/scripts/1019856700-common.js</a></li>
+<li><a href=https://beta.blogger.com/v-app/scripts/107652916-dom.common.js target=_blank >https://beta.blogger.com/v-app/scripts/107652916-dom.common.js</a></li>
+<li><a href=https://beta.blogger.com/v-js/3625575137-cookies.common.js target=_blank >https://beta.blogger.com/v-js/3625575137-cookies.common.js</a></li>
+<li><a href=https://beta.blogger.com/widgets/1638859070-widgets.js target=_blank >https://beta.blogger.com/widgets/1638859070-widgets.js</a></li>
+<li><a href=https://beta.blogger.com/widgets/2200193613-widgets.js target=_blank >https://beta.blogger.com/widgets/2200193613-widgets.js</a></li>
+<li><a href=https://beta.blogger.com/widgets/2413301736-widgets.js target=_blank >https://beta.blogger.com/widgets/2413301736-widgets.js</a></li>
+<li><a href=https://beta.blogger.com/widgets/2611175964-widgets.js target=_blank >https://beta.blogger.com/widgets/2611175964-widgets.js</a></li>
+<li><a href=https://beta.blogger.com/widgets/2662811415-widgets.js target=_blank >https://beta.blogger.com/widgets/2662811415-widgets.js</a></li>
+<li><a href=https://beta.blogger.com/widgets/3229027966-widgets.js target=_blank >https://beta.blogger.com/widgets/3229027966-widgets.js</a></li>
+<li><a href=https://beta.blogger.com/widgets/3611446312-widgets.js target=_blank >https://beta.blogger.com/widgets/3611446312-widgets.js</a></li>
+<li><a href=https://beta.blogger.com/widgets/94464370-widgets.js target=_blank >https://beta.blogger.com/widgets/94464370-widgets.js</a></li>
+<li><a href=https://blogger.com/AC_OETags.js target=_blank >https://blogger.com/AC_OETags.js</a></li>
+<li><a href=https://blogger.com/....js target=_blank >https://blogger.com/....js</a></li>
+<li><a href=https://bp2.blogger.com/static/js/jwplayer/jwplayer.js target=_blank >https://bp2.blogger.com/static/js/jwplayer/jwplayer.js</a></li>
+<li><a href=https://bp2.blogger.com/static/js/video-embed-rewriter.js target=_blank >https://bp2.blogger.com/static/js/video-embed-rewriter.js</a></li>
+<li><a href=https://buzz.blogger.com/2011/01/google-analytics.com/ga.js target=_blank >https://buzz.blogger.com/2011/01/google-analytics.com/ga.js</a></li>
+<li><a href=https://buzz.blogger.com/2012/02/.gstatic.com/feedback/api.js target=_blank >https://buzz.blogger.com/2012/02/.gstatic.com/feedback/api.js</a></li>
+<li><a href=https://buzz.blogger.com/2012/07/.google-analytics.com/ga.js target=_blank >https://buzz.blogger.com/2012/07/.google-analytics.com/ga.js</a></li>
+<li><a href=https://buzz.blogger.com/build/yuiloader/yuiloader.js target=_blank >https://buzz.blogger.com/build/yuiloader/yuiloader.js</a></li>
+<li><a href=https://buzz.blogger.com/build/yuiloader/yuiloader-min.js target=_blank >https://buzz.blogger.com/build/yuiloader/yuiloader-min.js</a></li>
+<li><a href=https://buzz.blogger.com/build/yui/yui.js target=_blank >https://buzz.blogger.com/build/yui/yui.js</a></li>
+<li><a href=https://buzz.blogger.com/build/yui/yui-min.js target=_blank >https://buzz.blogger.com/build/yui/yui-min.js</a></li>
+<li><a href=https://buzz.blogger.com/CFInstall.js target=_blank >https://buzz.blogger.com/CFInstall.js</a></li>
+<li><a href=https://buzz.blogger.com/CFInstall.min.js target=_blank >https://buzz.blogger.com/CFInstall.min.js</a></li>
+<li><a href=https://buzz.blogger.com/default.I.js target=_blank >https://buzz.blogger.com/default.I.js</a></li>
+<li><a href=https://buzz.blogger.com/dojo/dojo.js target=_blank >https://buzz.blogger.com/dojo/dojo.js</a></li>
+<li><a href=https://buzz.blogger.com/dojo/dojo.xd.js target=_blank >https://buzz.blogger.com/dojo/dojo.xd.js</a></li>
+<li><a href=https://buzz.blogger.com/ext-core-debug.js target=_blank >https://buzz.blogger.com/ext-core-debug.js</a></li>
+<li><a href=https://buzz.blogger.com/ext-core.js target=_blank >https://buzz.blogger.com/ext-core.js</a></li>
+<li><a href=https://buzz.blogger.com/.google-analytics.com/ga.js target=_blank >https://buzz.blogger.com/.google-analytics.com/ga.js</a></li>
+<li><a href=https://buzz.blogger.com/__help-utm.js target=_blank >https://buzz.blogger.com/__help-utm.js</a></li>
+<li><a href=https://buzz.blogger.com/jquery.js target=_blank >https://buzz.blogger.com/jquery.js</a></li>
+<li><a href=https://buzz.blogger.com/jquery.min.js target=_blank >https://buzz.blogger.com/jquery.min.js</a></li>
+<li><a href=https://buzz.blogger.com/jquery-ui.js target=_blank >https://buzz.blogger.com/jquery-ui.js</a></li>
+<li><a href=https://buzz.blogger.com/jquery-ui.min.js target=_blank >https://buzz.blogger.com/jquery-ui.min.js</a></li>
+<li><a href=https://buzz.blogger.com/js/cookiechoices.js target=_blank >https://buzz.blogger.com/js/cookiechoices.js</a></li>
+<li><a href=https://buzz.blogger.com/mootools.js target=_blank >https://buzz.blogger.com/mootools.js</a></li>
+<li><a href=https://buzz.blogger.com/mootools-yui-compressed.js target=_blank >https://buzz.blogger.com/mootools-yui-compressed.js</a></li>
+<li><a href=https://buzz.blogger.com/prototype.js target=_blank >https://buzz.blogger.com/prototype.js</a></li>
+<li><a href=https://buzz.blogger.com/scriptaculous.js target=_blank >https://buzz.blogger.com/scriptaculous.js</a></li>
+<li><a href=https://buzz.blogger.com/swfobject.js target=_blank >https://buzz.blogger.com/swfobject.js</a></li>
+<li><a href=https://buzz.blogger.com/swfobject_src.js target=_blank >https://buzz.blogger.com/swfobject_src.js</a></li>
+<li><a href=https://buzz.blogger.com/webfont_debug.js target=_blank >https://buzz.blogger.com/webfont_debug.js</a></li>
+<li><a href=https://buzz.blogger.com/webfont.js target=_blank >https://buzz.blogger.com/webfont.js</a></li>
+<li><a href=https://code.blogger.com/build/yuiloader/yuiloader.js target=_blank >https://code.blogger.com/build/yuiloader/yuiloader.js</a></li>
+<li><a href=https://code.blogger.com/build/yuiloader/yuiloader-min.js target=_blank >https://code.blogger.com/build/yuiloader/yuiloader-min.js</a></li>
+<li><a href=https://code.blogger.com/build/yui/yui.js target=_blank >https://code.blogger.com/build/yui/yui.js</a></li>
+<li><a href=https://code.blogger.com/build/yui/yui-min.js target=_blank >https://code.blogger.com/build/yui/yui-min.js</a></li>
+<li><a href=https://code.blogger.com/CFInstall.js target=_blank >https://code.blogger.com/CFInstall.js</a></li>
+<li><a href=https://code.blogger.com/CFInstall.min.js target=_blank >https://code.blogger.com/CFInstall.min.js</a></li>
+<li><a href=https://code.blogger.com/dd-level-menu.js target=_blank >https://code.blogger.com/dd-level-menu.js</a></li>
+<li><a href=https://code.blogger.com/default+en.I.js target=_blank >https://code.blogger.com/default+en.I.js</a></li>
+<li><a href=https://code.blogger.com/default.I.js target=_blank >https://code.blogger.com/default.I.js</a></li>
+<li><a href=https://code.blogger.com/dojo/dojo.js target=_blank >https://code.blogger.com/dojo/dojo.js</a></li>
+<li><a href=https://code.blogger.com/dojo/dojo.js.uncompressed.js target=_blank >https://code.blogger.com/dojo/dojo.js.uncompressed.js</a></li>
+<li><a href=https://code.blogger.com/dojo/dojo.xd.js target=_blank >https://code.blogger.com/dojo/dojo.xd.js</a></li>
+<li><a href=https://code.blogger.com/dojo/dojo.xd.js.uncompressed.js target=_blank >https://code.blogger.com/dojo/dojo.xd.js.uncompressed.js</a></li>
+<li><a href=https://code.blogger.com/ext-core-debug.js target=_blank >https://code.blogger.com/ext-core-debug.js</a></li>
+<li><a href=https://code.blogger.com/ext-core.js target=_blank >https://code.blogger.com/ext-core.js</a></li>
+<li><a href=https://code.blogger.com/.gstatic.com/feedback/api.js target=_blank >https://code.blogger.com/.gstatic.com/feedback/api.js</a></li>
+<li><a href=https://code.blogger.com/jquery.js target=_blank >https://code.blogger.com/jquery.js</a></li>
+<li><a href=https://code.blogger.com/jquery.min.js target=_blank >https://code.blogger.com/jquery.min.js</a></li>
+<li><a href=https://code.blogger.com/jquery-ui.js target=_blank >https://code.blogger.com/jquery-ui.js</a></li>
+<li><a href=https://code.blogger.com/jquery-ui.min.js target=_blank >https://code.blogger.com/jquery-ui.min.js</a></li>
+<li><a href=https://code.blogger.com/.js target=_blank >https://code.blogger.com/.js</a></li>
+<li><a href=https://code.blogger.com/mootools.js target=_blank >https://code.blogger.com/mootools.js</a></li>
+<li><a href=https://code.blogger.com/mootools-yui-compressed.js target=_blank >https://code.blogger.com/mootools-yui-compressed.js</a></li>
+<li><a href=https://code.blogger.com/prototype.js target=_blank >https://code.blogger.com/prototype.js</a></li>
+<li><a href=https://code.blogger.com/scriptaculous.js target=_blank >https://code.blogger.com/scriptaculous.js</a></li>
+<li><a href=https://code.blogger.com/swfobject.js target=_blank >https://code.blogger.com/swfobject.js</a></li>
+<li><a href=https://code.blogger.com/swfobject_src.js target=_blank >https://code.blogger.com/swfobject_src.js</a></li>
+<li><a href=https://code.blogger.com/webfont_debug.js target=_blank >https://code.blogger.com/webfont_debug.js</a></li>
+<li><a href=https://code.blogger.com/webfont.js target=_blank >https://code.blogger.com/webfont.js</a></li>
+<li><a href=https://draft.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%20%3Cscript%3E(function(d,%20s,%20id)%20%7B%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20if%20(d.getElementById(id))%20return;%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20js.src%20=%20%22//connect.facebook.net/de_DE/all.js target=_blank >https://draft.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%20%3Cscript%3E(function(d,%20s,%20id)%20%7B%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20if%20(d.getElementById(id))%20return;%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20js.src%20=%20%22//connect.facebook.net/de_DE/all.js</a></li>
+<li><a href=https://draft.blogger.com/about/js/main.min.js target=_blank >https://draft.blogger.com/about/js/main.min.js</a></li>
+<li><a href=https://draft.blogger.com/app/scripts/emaillink.js target=_blank >https://draft.blogger.com/app/scripts/emaillink.js</a></li>
+<li><a href=https://draft.blogger.com/blogin.g?blogspotURL=https://pm-modi-berozgaar-bhatta-yojnabero.blogspot.com/jquery.tools.min.js target=_blank >https://draft.blogger.com/blogin.g?blogspotURL=https://pm-modi-berozgaar-bhatta-yojnabero.blogspot.com/jquery.tools.min.js</a></li>
+<li><a href=https://draft.blogger.com/dyn-js/backlink_count.js target=_blank >https://draft.blogger.com/dyn-js/backlink_count.js</a></li>
+<li><a href=https://draft.blogger.com/feeds/19160405/posts/D3.js target=_blank >https://draft.blogger.com/feeds/19160405/posts/D3.js</a></li>
+<li><a href=https://draft.blogger.com/feeds/5532324792230149469/posts/nuxt.js target=_blank >https://draft.blogger.com/feeds/5532324792230149469/posts/nuxt.js</a></li>
+<li><a href=https://draft.blogger.com/gci_91f30755d6a6b787dcc2a4062e6e9824.js target=_blank >https://draft.blogger.com/gci_91f30755d6a6b787dcc2a4062e6e9824.js</a></li>
+<li><a href=https://draft.blogger.com/profile/gci_91f30755d6a6b787dcc2a4062e6e9824.js target=_blank >https://draft.blogger.com/profile/gci_91f30755d6a6b787dcc2a4062e6e9824.js</a></li>
+<li><a href=https://draft.blogger.com/profile/.google-analytics.com/ga.js target=_blank >https://draft.blogger.com/profile/.google-analytics.com/ga.js</a></li>
+<li><a href=http://search.blogger.com/blogsearch/script/bsrchapp.js target=_blank >http://search.blogger.com/blogsearch/script/bsrchapp.js</a></li>
+<li><a href=http://search.blogger.com/blogsearch/script/bsrchnbar.js target=_blank >http://search.blogger.com/blogsearch/script/bsrchnbar.js</a></li>
+<li><a href=http://search.blogger.com/blogsearch/script/bsrchsbox.js target=_blank >http://search.blogger.com/blogsearch/script/bsrchsbox.js</a></li>
+<li><a href=https://help.blogger.com/bin/resource/urchin_util.js target=_blank >https://help.blogger.com/bin/resource/urchin_util.js</a></li>
+<li><a href=https://help.blogger.com/bin/static.py?page=__utm.js target=_blank >https://help.blogger.com/bin/static.py?page=__utm.js</a></li>
+<li><a href=https://pro.blogger.com/scripts/blogger.js target=_blank >https://pro.blogger.com/scripts/blogger.js</a></li>
+<li><a href=https://pro.blogger.com/scripts/signin.js target=_blank >https://pro.blogger.com/scripts/signin.js</a></li>
+<li><a href=https://search.blogger.com/blogsearch/cscript/calpop-tight2.js target=_blank >https://search.blogger.com/blogsearch/cscript/calpop-tight2.js</a></li>
+<li><a href=https://search.blogger.com/gci_91f30755d6a6b787dcc2a4062e6e9824.js target=_blank >https://search.blogger.com/gci_91f30755d6a6b787dcc2a4062e6e9824.js</a></li>
+<li><a href=https://www2.blogger.com/app/scripts/emaillink.js target=_blank >https://www2.blogger.com/app/scripts/emaillink.js</a></li>
+<li><a href=https://www.blogger.com/%0A%0Astatic/v1/common/js/34079992%0A%0A31-csitail.js target=_blank >https://www.blogger.com/%0A%0Astatic/v1/common/js/34079992%0A%0A31-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20class=%22pw-widget%20pw-counter-none%22%3E%20%09%3Ca%20class=%22pw-button-facebook%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-twitter%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-linkedin%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-googleplus%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-post-share%22%3E%3C/a%3E%20%3C/div%3E%20%3Cscript%20src=%22http:/i.po.st/share/script/post-widget.js target=_blank >https://www.blogger.com/%3Cdiv%20class=%22pw-widget%20pw-counter-none%22%3E%20%09%3Ca%20class=%22pw-button-facebook%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-twitter%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-linkedin%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-googleplus%20pw-look-native%22%3E%3C/a%3E%20%09%3Ca%20class=%22pw-button-post-share%22%3E%3C/a%3E%20%3C/div%3E%20%3Cscript%20src=%22http:/i.po.st/share/script/post-widget.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20class=%22pw-widget%20pw-counter-none%22%3E%20%3Ca%20class=%22pw-button-facebook%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-twitter%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-linkedin%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-googleplus%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-post-share%22%3E%3C/a%3E%20%3C/div%3E%20%3Cscript%20src=%22http:/i.po.st/static/v3/post-widget.js target=_blank >https://www.blogger.com/%3Cdiv%20class=%22pw-widget%20pw-counter-none%22%3E%20%3Ca%20class=%22pw-button-facebook%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-twitter%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-linkedin%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-googleplus%20pw-look-native%22%3E%3C/a%3E%20%3Ca%20class=%22pw-button-post-share%22%3E%3C/a%3E%20%3C/div%3E%20%3Cscript%20src=%22http:/i.po.st/static/v3/post-widget.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%20%3Cscript%3E(function(d,%20s,%20id)%20%7B%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20if%20(d.getElementById(id))%20return;%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20js.src%20=%20%22//connect.facebook.net/en_GB/all.js target=_blank >https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%20%3Cscript%3E(function(d,%20s,%20id)%20%7B%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20if%20(d.getElementById(id))%20return;%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20js.src%20=%20%22//connect.facebook.net/en_GB/all.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%20%3Cscript%3E(function(d,%20s,%20id)%20%7B%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20if%20(d.getElementById(id))%20return;%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20js.src%20=%20%22//connect.facebook.net/en_US/all.js target=_blank >https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%20%3Cscript%3E(function(d,%20s,%20id)%20%7B%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20if%20(d.getElementById(id))%20return;%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20js.src%20=%20%22//connect.facebook.net/en_US/all.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%20src=%22http://connect.facebook.net/en_US/all.js target=_blank >https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%20src=%22http://connect.facebook.net/en_US/all.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)[0];%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22/connect.facebook.net/es_ES/sdk.js target=_blank >https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)[0];%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22/connect.facebook.net/es_ES/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/en_GB/sdk.js target=_blank >https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/en_GB/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/en_US/sdk.js target=_blank >https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/en_US/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/es_LA/sdk.js target=_blank >https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/es_LA/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/fr_FR/sdk.js target=_blank >https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/fr_FR/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/it_IT/sdk.js target=_blank >https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/it_IT/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/ja_JP/all.js target=_blank >https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/ja_JP/all.js</a></li>
+<li><a href=https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/pt_BR/sdk.js target=_blank >https://www.blogger.com/%3Cdiv%20id=%22fb-root%22%3E%3C/div%3E%3Cscript%3E(function(d,%20s,%20id)%20%7B%20%20var%20js,%20fjs%20=%20d.getElementsByTagName(s)%5B0%5D;%20%20if%20(d.getElementById(id))%20return;%20%20js%20=%20d.createElement(s);%20js.id%20=%20id;%20%20js.src%20=%20%22//connect.facebook.net/pt_BR/sdk.js</a></li>
+<li><a href=https://www.blogger.com/%3Cscript%20height=%22315px%22%20width=%22560px%22%20src=%22http://player.ooyala.com/iframe.js target=_blank >https://www.blogger.com/%3Cscript%20height=%22315px%22%20width=%22560px%22%20src=%22http://player.ooyala.com/iframe.js</a></li>
+<li><a href=https://www.blogger.com/about/gtm.js target=_blank >https://www.blogger.com/about/gtm.js</a></li>
+<li><a href=https://www.blogger.com/about/js/main.min.js target=_blank >https://www.blogger.com/about/js/main.min.js</a></li>
+<li><a href=https://www.blogger.com/app/scripts/animation_common.js target=_blank >https://www.blogger.com/app/scripts/animation_common.js</a></li>
+<li><a href=https://www.blogger.com/app/scripts/animation_explore.js target=_blank >https://www.blogger.com/app/scripts/animation_explore.js</a></li>
+<li><a href=https://www.blogger.com/app/scripts/comments.common.js target=_blank >https://www.blogger.com/app/scripts/comments.common.js</a></li>
+<li><a href=https://www.blogger.com/app/scripts/common.js target=_blank >https://www.blogger.com/app/scripts/common.js</a></li>
+<li><a href=https://www.blogger.com/app/scripts/formcheck.js target=_blank >https://www.blogger.com/app/scripts/formcheck.js</a></li>
+<li><a href=https://www.blogger.com/app/scripts/status.js target=_blank >https://www.blogger.com/app/scripts/status.js</a></li>
+<li><a href=https://www.blogger.com/%C3%83%C2%AF%C3%98%C2%9F%C3%82%C2%BD/v1/common/js/1912144495-csitail.js target=_blank >https://www.blogger.com/%C3%83%C2%AF%C3%98%C2%9F%C3%82%C2%BD/v1/common/js/1912144495-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%C3%83%C2%AF%C3%98%C2%9F%C3%82%C2%BD/v1/common/js/2858158682-csitail.js target=_blank >https://www.blogger.com/%C3%83%C2%AF%C3%98%C2%9F%C3%82%C2%BD/v1/common/js/2858158682-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%C3%AF?%C2%BD?%C3%AF?%C2%BD/v1/common/js/1912144495-csitail.js target=_blank >https://www.blogger.com/%C3%AF?%C2%BD?%C3%AF?%C2%BD/v1/common/js/1912144495-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%C3%AF?%C2%BD?%C3%AF?%C2%BD/v1/common/js/2858158682-csitail.js target=_blank >https://www.blogger.com/%C3%AF?%C2%BD?%C3%AF?%C2%BD/v1/common/js/2858158682-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%C3%AF%D8%9F%C2%BD/v1/common/js/1912144495-csitail.js target=_blank >https://www.blogger.com/%C3%AF%D8%9F%C2%BD/v1/common/js/1912144495-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%C3%AF%D8%9F%C2%BD/v1/common/js/2858158682-csitail.js target=_blank >https://www.blogger.com/%C3%AF%D8%9F%C2%BD/v1/common/js/2858158682-csitail.js</a></li>
+<li><a href=https://www.blogger.com/.cache.js target=_blank >https://www.blogger.com/.cache.js</a></li>
+<li><a href=https://www.blogger.com/.../common/js/168336579-csitail.js target=_blank >https://www.blogger.com/.../common/js/168336579-csitail.js</a></li>
+<li><a href=https://www.blogger.com/.../common/js/1912144495-csitail.js target=_blank >https://www.blogger.com/.../common/js/1912144495-csitail.js</a></li>
+<li><a href=https://www.blogger.com/.../common/js/2858158682-csitail.js target=_blank >https://www.blogger.com/.../common/js/2858158682-csitail.js</a></li>
+<li><a href=https://www.blogger.com/.../common/js/545917451-csitail.js target=_blank >https://www.blogger.com/.../common/js/545917451-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%E2%80%A6/v1/common/js/1912144495-csitail.js target=_blank >https://www.blogger.com/%E2%80%A6/v1/common/js/1912144495-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%E2%80%A6/v1/common/js/2858158682-csitail.js target=_blank >https://www.blogger.com/%E2%80%A6/v1/common/js/2858158682-csitail.js</a></li>
+<li><a href=https://www.blogger.com/%E2%80%A6/v1/common/js/4174905999-csitail.js target=_blank >https://www.blogger.com/%E2%80%A6/v1/common/js/4174905999-csitail.js</a></li>
+<li><a href=https://www.blogger.com/.google-analytics.com/ga.js target=_blank >https://www.blogger.com/.google-analytics.com/ga.js</a></li>
+<li><a href=https://www.blogger.com/.js target=_blank >https://www.blogger.com/.js</a></li>
+<li><a href=https://www.blogger.com/.../v1/widgets/4185472346-widgets.js target=_blank >https://www.blogger.com/.../v1/widgets/4185472346-widgets.js</a></li>
+<li><a href=http://www2.blogger.com/app/dyn-js/suggest-subdomain.js target=_blank >http://www2.blogger.com/app/dyn-js/suggest-subdomain.js</a></li>
+<li><a href=http://www2.blogger.com/app/scripts/common.js target=_blank >http://www2.blogger.com/app/scripts/common.js</a></li>
+<li><a href=http://www2.blogger.com/app/scripts/dyn-js/suggest-subdomain.js target=_blank >http://www2.blogger.com/app/scripts/dyn-js/suggest-subdomain.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/animation_comm.js target=_blank >http://www.blogger.com/app/scripts/animation_comm.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/animation_explor4we.js target=_blank >http://www.blogger.com/app/scripts/animation_explor4we.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/animation.js target=_blank >http://www.blogger.com/app/scripts/animation.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts//app/scripts/post.constants.js target=_blank >http://www.blogger.com/app/scripts//app/scripts/post.constants.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/backup.js target=_blank >http://www.blogger.com/app/scripts/backup.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/blog_form_shortcuts_ie.js target=_blank >http://www.blogger.com/app/scripts/blog_form_shortcuts_ie.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/detect.js target=_blank >http://www.blogger.com/app/scripts/detect.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/dom.common.js target=_blank >http://www.blogger.com/app/scripts/dom.common.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/dom.selection.js target=_blank >http://www.blogger.com/app/scripts/dom.selection.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/event.keypress.js target=_blank >http://www.blogger.com/app/scripts/event.keypress.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/form.textbar.js target=_blank >http://www.blogger.com/app/scripts/form.textbar.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/highlightError.js target=_blank >http://www.blogger.com/app/scripts/highlightError.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/post.constants.js target=_blank >http://www.blogger.com/app/scripts/post.constants.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/post.preview.toggle.js target=_blank >http://www.blogger.com/app/scripts/post.preview.toggle.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/richedit.common.js target=_blank >http://www.blogger.com/app/scripts/richedit.common.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/richedit.textutils.js target=_blank >http://www.blogger.com/app/scripts/richedit.textutils.js</a></li>
+<li><a href=http://www.blogger.com/app/scripts/suggest_subdomain.js target=_blank >http://www.blogger.com/app/scripts/suggest_subdomain.js</a></li>
+<li><a href=http://www.blogger.com/blog-this.g?t=++--%26gt;++++We+can+add+call+back+in+node.js+in+two+ways++1.Write+a+call+back+inside+a+method++Ex:++fs.readFile(%26%2339;/abc/def%26%2339;,function(e...&u=http://www.nodemongo.asia/2013/01/call-back-in-nodejs.html?spref%3Dbl&n=Node.js+tutorials+and+MongoDB+tutorials:+Call+Back+in+node.js target=_blank >http://www.blogger.com/blog-this.g?t=++--%26gt;++++We+can+add+call+back+in+node.js+in+two+ways++1.Write+a+call+back+inside+a+method++Ex:++fs.readFile(%26%2339;/abc/def%26%2339;,function(e...&u=http://www.nodemongo.asia/2013/01/call-back-in-nodejs.html?spref%3Dbl&n=Node.js+tutorials+and+MongoDB+tutorials:+Call+Back+in+node.js</a></li>
+
+      </ul>
+    </div>
+    </div>
+
+  </body>
+  
+
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-16 w3-theme-dark">
+    <h4>JSFScan</h4>
+    <p>Developed with <i class="fa fa-heart"></i> by <a href="https://github.com/KathanP19/JSFScan.sh" target="_blank">KathanP19</a></p>
+  </footer>
+
+  <!-- End page content -->
+</div>
+
+<script>
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+  if (mySidebar.style.display === "block") {
+    mySidebar.style.display = "none";
+    overlayBg.style.display = "none";
+  } else {
+    mySidebar.style.display = "block";
+    overlayBg.style.display = "block";
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+  mySidebar.style.display = "none";
+  overlayBg.style.display = "none";
+}
+
+function myFunction(Input, Id) {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById(Input);
+    filter = input.value.toUpperCase();
+    ul = document.getElementById(Id);
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+function openTable(tablename) {
+  var i;
+  var x = document.getElementsByClassName("report");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  document.getElementById(tablename).style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
+
